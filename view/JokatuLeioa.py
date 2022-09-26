@@ -9,7 +9,7 @@ class JokatuLeioa(object):
 	def __init__(self):
 		super(JokatuLeioa, self).__init__()
 		self.window = tk.Tk()
-		self.window.geometry('220x460')
+		self.window.geometry('220x460') #LEHIOAREN TAMAINA
 		self.window.title("Tetris jokoa")
 
 		
@@ -87,7 +87,7 @@ class TableroaPanela(tk.Frame):
 				print("GAMEOVER")
 				self.tab.hasieratu_tableroa()
 				return
-		self.jokatzen = self.after(400, self.pausu_bat)
+		self.jokatzen = self.after(400, self.pausu_bat) #ABIADURA
 		self.marraztu_tableroa()
 
 	def puntuazioa_eguneratu(self):
