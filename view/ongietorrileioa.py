@@ -1,17 +1,11 @@
 import tkinter as tk
 
-
-
-
-
-
 class ongietorrileioa(object):
 
 
     def __init__(self):
         super(ongietorrileioa,self).__init__()
         self.window = tk.Tk()
-        self.window.geometry('600x400')
         self.window.attributes('-fullscreen',True)
         self.window.title("Ongi Etorri")
         button = tk.Button(self.window, text="Hasi saioa")
@@ -24,3 +18,5 @@ class ongietorrileioa(object):
         button3.pack()
 
         self.window.mainloop()
+
+
