@@ -47,7 +47,7 @@ def printValue():
 
 
     else:
-        tk.Label(window, text='Bete itzazu eremu guztiak mesedez.', pady=10, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)
+        tk.Label(window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)
 
 
 
