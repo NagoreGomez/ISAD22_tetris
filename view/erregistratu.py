@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as tk
 
 import sqlite3
-
+#hola
 window = tk.Tk()
 window.title("Erregistratzeko orria")
 window.geometry('600x400')
