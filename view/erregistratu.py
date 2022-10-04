@@ -2,7 +2,10 @@ from tkinter import *
 import tkinter as tk
 
 import sqlite3
-#hola
+
+con = sqlite3.connect("datubasea.db") #konexioa ezarri
+cur = con.cursor()
+
 window = tk.Tk()
 window.title("Erregistratzeko orria")
 window.geometry('600x400')
@@ -16,12 +19,31 @@ def printValue():
     email=emailE.get()
     pasahitza=pasahitzaE.get()
     if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )):
-        tk.Label(window, text=f'{izena}, erregistratu zara!', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)
+        #begiratu erabiltzaile egokia sortu duen
+        res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        ezDago = res.fetchone() is None
+        if (ezDago):
+            print("ez dagooo")
+            tk.Label(window, text=f'{izena}, erregistratu zara!', pady=10, padx=180, bg='CadetBlue1',
+                     font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
+            # insert
+            cur.execute(
+                "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza)")
+            cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?)", (erabiltzailea, izena, email, pasahitza))
+            con.commit()
 
 
-        #insert
+        else:
+            tk.Label(window, text=f'{erabiltzailea} erabiltzailea jadanik dago, idatzi beste bat mesedez.', pady=10, padx=90, bg='CadetBlue1',
+                     font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
 
 
+
+        #para ver que se ha insertado
+        res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak")
+        #print(res.fetchall())
+
+       #para borrar la db --> cur.execute("DELETE FROM erabiltzaileak")
 
 
     else:
@@ -33,7 +55,7 @@ def printValue():
 Errgistroa = tk.Label(window, text="ERREGISTRATZEKO ORRIA", bg='CadetBlue1',font=("Times", 14, "bold"))
 Errgistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)
 
-izenaL = tk.Label(window, text="Izena:", bg='CadetBlue1',font=("Times", 11))
+izenaL = tk.Label(window, text="Izen Abizenak:", bg='CadetBlue1',font=("Times", 11))
 izenaL.place(x=80, y=70)
 
 

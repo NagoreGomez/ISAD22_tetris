@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="datubasea" uuid="8320187a-b621-40b3-9a84-73e0dd4ee37e">
+    <data-source source="LOCAL" name="datubasea [2]" uuid="bce8086c-e21f-46a3-9568-4b1c4349e841">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Nagore\PycharmProjects\ISAD22_tetris\datubasea.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\Nagore\PycharmProjects\ISAD22_tetris\view\datubasea.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
