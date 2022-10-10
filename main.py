@@ -5,7 +5,7 @@ from view.erregistratu import erregistratu
 from view.pasahitzaAldatu import pasahitzaAldatu
 from view.pasahitzaBerreskuratu import pasahitzaBerreskuratu
 
-#pruebaa
+#prueba
 
 if __name__ == '__main__':
 	tetris = JokatuLeioa()
