@@ -9,10 +9,10 @@ from view.pasahitzaBerreskuratu import pasahitzaBerreskuratu
 
 if __name__ == '__main__':
 	ongietorrileioa()
-	#tetris = JokatuLeioa()
-	#saioaHasi()
+	tetris = JokatuLeioa()
+	saioaHasi()
 
 
-	#erregistratu()
-	#pasahitzaAldatu()
-	#pasahitzaBerreskuratu()
+	erregistratu()
+	pasahitzaAldatu()
+	pasahitzaBerreskuratu()
