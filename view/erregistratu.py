@@ -52,8 +52,6 @@ class erregistratu(object):
         tk.Button(self.window,text="Erregistratu",padx=10,pady=5,bg="AliceBlue",command=self.printValue).pack(pady=20)
 
 
-
-
         self.window.mainloop()
 
     def printValue(self):
