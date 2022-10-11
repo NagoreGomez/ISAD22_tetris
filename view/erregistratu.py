@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, CENTER
 from tkinter import *
-
+from view.saioaHasi import saioaHasi
 import sqlite3
 
 
@@ -80,6 +80,9 @@ class erregistratu(object):
                 con.commit()
                 print("hola1")
 
+
+                self.window.destroy()
+                saioaHasi().__init__()
 
             else:
                 print("hola2")
