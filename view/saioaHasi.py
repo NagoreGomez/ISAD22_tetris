@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 import sqlite3
+import view
 
 class saioaHasi(object):
 
@@ -38,7 +39,13 @@ class saioaHasi(object):
             command=self.printValue
         ).pack(pady=20)
 
+        tk.Button(self.window, text="Atzera", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
+
         self.window.mainloop()
+
+    def atzera(self):
+        self.window.destroy()
+        view.ongietorrileioa.ongietorrileioa().__init__()
 
     def printValue(self):
         erabiltzailea=self.erabiltzaileaE.get()
@@ -48,7 +55,6 @@ class saioaHasi(object):
             res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND pasahitza=(?)", (erabiltzailea,pasahitza))
             ezDago = res.fetchone() is None
             if (ezDago):
-                print("Txarto")
                 tk.Label(self.window, text='Pasahitza edo erabiltzailea txarto daude, saiatu berriz mesedez.', pady=10,
                          padx=90, bg='CadetBlue1',
                          font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
@@ -56,9 +62,9 @@ class saioaHasi(object):
 
             else:
 
-                tk.Label(self.window, text='Saioa hasi duzu!', pady=10, padx=200, bg='CadetBlue1',
-                         font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
-
+                tk.Label(self.window, text='Saioa hasi duzu!', pady=10, padx=200, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
+                self.window.destroy()
+                view.abiadura.abiadura().__init__()
 
 
 

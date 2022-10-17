@@ -11,7 +11,7 @@ class erregistratu(object):
         super(erregistratu, self).__init__()
         self.window = tk.Tk()
         self.window.title("Erregistratzeko orria")
-        self.window.geometry('600x400')
+        self.window.geometry('600x500')
         self.window['bg'] = 'CadetBlue1'
 
 
@@ -43,23 +43,23 @@ class erregistratu(object):
         self.pasahitzaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, show="•")
         self.pasahitzaE.pack(pady=5, padx=5, ipadx=20)
 
-        gakoaL = tk.Label(self.window, text="Berreskurapen-galdera:",bg='CadetBlue1', font=("Times", 11))
-        gakoaL.place(x=75, y=190)
+        gakoGalderaL = tk.Label(self.window, text="Berreskurapen-galdera:",bg='CadetBlue1', font=("Times", 11))
+        gakoGalderaL.place(x=75, y=190)
 
-        self.gakoaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, show="•")
-        self.gakoaE.pack(pady=5, padx=5, ipadx=20)
+        self.gakoGalderaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL)
+        self.gakoGalderaE.pack(pady=5, padx=5, ipadx=20)
 
         gakoaL = tk.Label(self.window, text="Berreskurapen-gakoa:", bg='CadetBlue1', font=("Times", 11))
         gakoaL.place(x=75, y=220)
 
-        self.gakoaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, show="•")
+        self.gakoaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL)
         self.gakoaE.pack(pady=5, padx=5, ipadx=20)
 
-        tk.Button(self.window,text="Erregistratu",padx=10,pady=5,bg="AliceBlue",command=self.printValue).pack(pady=20)
+        tk.Button(self.window,text="Erregistratu",padx=10,pady=5,bg="AliceBlue",command=self.printValue).pack(pady=15)
 
 
 #atzera
-        tk.Button(self.window, text="Atzera", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=20)
+        tk.Button(self.window, text="Atzera", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
 
         self.window.mainloop()
 
@@ -80,25 +80,26 @@ class erregistratu(object):
         email=self.emailE.get()
         pasahitza=self.pasahitzaE.get()
         gakoa=self.gakoaE.get()
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        gakoGaldera=self.gakoGalderaE.get()
+
         if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )&(len(gakoa)!=0 )):
             #begiratu erabiltzaile egokia sortu duen
             cur.execute(
-                "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza,gakoa)")
+                "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
             res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
             ezDago = res.fetchone() is None
             if (ezDago):
                 tk.Label(self.window, text=f'{izena}, erregistratu zara!', pady=10, padx=180,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5,rely=.8,anchor=CENTER)
                 # insert
-                cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?)", (erabiltzailea, izena, email, pasahitza,gakoa))
+                cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)", (erabiltzailea, izena, email, pasahitza,gakoGaldera,gakoa))
                 con.commit()
-                print("hola1")
+                self.window.destroy()
+                view.saioaHasi.saioaHasi().__init__()
+
 
 
             else:
-                print("hola2")
                 tk.Label(self.window, text=f'{erabiltzailea} erabiltzailea jadanik dago, idatzi beste bat mesedez.', pady=10, padx=90,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8,anchor=CENTER)
         else:
-            print("hola3")
             tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8,anchor=CENTER)
 

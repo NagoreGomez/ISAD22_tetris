@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter as tk
-
+import view
 import sqlite3
 
 class pasahitzaAldatu(object):
@@ -45,7 +45,14 @@ class pasahitzaAldatu(object):
             command=self.printValue
         ).pack(pady=20)
 
+        # atzera
+        tk.Button(self.window, text="Atzera", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
+
         self.window.mainloop()
+
+    def atzera(self):
+        self.window.destroy()
+        view.ongietorrileioa.ongietorrileioa().__init__()
 
 
     def printValue(self):
@@ -53,10 +60,15 @@ class pasahitzaAldatu(object):
         erabiltzailea=self.erabiltzaileaE.get()
         pasahitza=self.pasahitzaE.get()
         pasahitzaBerria=self.pasahitzaBerriaE.get()
+
+        con = sqlite3.connect("datubasea.db")  # konexioa ezarri
+        cur = con.cursor()
+
         if ((len(erabiltzailea)!=0) &(len(pasahitza)!=0 )&(len(pasahitzaBerria)!=0)):
             #begiratu erabiltzaile eta pasahitz egokia sortu dituen
             res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND pasahitza=(?)", (erabiltzailea,pasahitza))
             ezDago = res.fetchone() is None
+            print(ezDago)
             if (ezDago):
                 tk.Label(self.window, text='Sartutako informazioa ez da egokia, saiatu berriz mesedez.', pady=10,
                          padx=90, bg='CadetBlue1',
@@ -67,10 +79,11 @@ class pasahitzaAldatu(object):
             else:
                 tk.Label(self.window, text='Pasahitza aldatu duzu!', pady=10, padx=180, bg='CadetBlue1',
                          font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
-
                 # update
-                self.cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)", (pasahitzaBerria,erabiltzailea))
-                self.con.commit()
+                cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)",(pasahitzaBerria, erabiltzailea))
+                con.commit()
+                self.window.destroy()
+                view.saioaHasi.saioaHasi().__init__()
 
 
         else:
