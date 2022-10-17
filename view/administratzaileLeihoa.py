@@ -1,6 +1,8 @@
 import tkinter as tk
 from view.JokatuLeioa import JokatuLeioa
+from view.abiadurak import abiadurak
 from view.jokalariakKudeatu import jokalariakKudeatu
+import view
 
 class administratzaileLeihoa(object):
 
@@ -19,17 +21,22 @@ class administratzaileLeihoa(object):
         button.pack(pady=10)
         button1 = tk.Button(self.window, text="Admistratzaileak kudeatu",padx=40,pady=5, command=self.administratu)
         button1.pack(pady=10)
-
+        button2 = tk.Button(self.window,text="Atzera",padx=40,pady=5,command=self.atzera)
+        button2.pack(pady=10)
 
         self.window.mainloop()
 
     def jokatu(self):
         self.window.destroy()
-        JokatuLeioa().__init__()
+        abiadurak().__init__()
 
     def administratu(self):
         self.window.destroy()
         jokalariakKudeatu().__init__()
+
+    def atzera(self):
+        self.window.destroy()
+        view.saioaHasi.saioaHasi()
 
 
 

@@ -49,7 +49,7 @@ class tamaina(object):
             tamainay = 20
         elif (self.aukera.get() == 2):
             tamainax = 15
-            tamianay = 25
+            tamainay = 25
         elif (self.aukera.get() == 3):
             tamainax = 20
             tamainay = 30
