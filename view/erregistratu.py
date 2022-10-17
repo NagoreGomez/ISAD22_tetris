@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, CENTER
 from tkinter import *
-
+import view
 import sqlite3
 
 
@@ -20,31 +20,37 @@ class erregistratu(object):
         erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)
 
         izenaL = tk.Label(self.window, text="Izen Abizenak:",bg='CadetBlue1', font=("Times", 11))
-        izenaL.place(x=80, y=70)
+        izenaL.place(x=75, y=70)
 
         self.izenaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL)
         self.izenaE.pack(pady=5, padx=5, ipadx=20)
 
         erabiltzaileaL = tk.Label(self.window, text="Erabiltzailea:",bg='CadetBlue1', font=("Times", 11))
-        erabiltzaileaL.place(x=80, y=100)
+        erabiltzaileaL.place(x=75, y=100)
 
         self.erabiltzaileaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, validate="key")
         self.erabiltzaileaE.pack(pady=5, padx=5, ipadx=20)
 
         emailL = tk.Label(self.window, text="Helbide elektronikoa:",bg='CadetBlue1', font=("Times", 11))
-        emailL.place(x=80, y=130)
+        emailL.place(x=75, y=130)
 
         self.emailE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL)
         self.emailE.pack(pady=5, padx=5, ipadx=20)
 
         pasahitzaL = tk.Label(self.window, text="Pasahitza:",bg='CadetBlue1', font=("Times", 11))
-        pasahitzaL.place(x=80, y=160)
+        pasahitzaL.place(x=75, y=160)
 
         self.pasahitzaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, show="•")
         self.pasahitzaE.pack(pady=5, padx=5, ipadx=20)
 
-        gakoaL = tk.Label(self.window, text="Berreskurapen-gakoa:",bg='CadetBlue1', font=("Times", 11))
-        gakoaL.place(x=80, y=190)
+        gakoaL = tk.Label(self.window, text="Berreskurapen-galdera:",bg='CadetBlue1', font=("Times", 11))
+        gakoaL.place(x=75, y=190)
+
+        self.gakoaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, show="•")
+        self.gakoaE.pack(pady=5, padx=5, ipadx=20)
+
+        gakoaL = tk.Label(self.window, text="Berreskurapen-gakoa:", bg='CadetBlue1', font=("Times", 11))
+        gakoaL.place(x=75, y=220)
 
         self.gakoaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, show="•")
         self.gakoaE.pack(pady=5, padx=5, ipadx=20)
@@ -52,7 +58,15 @@ class erregistratu(object):
         tk.Button(self.window,text="Erregistratu",padx=10,pady=5,bg="AliceBlue",command=self.printValue).pack(pady=20)
 
 
+#atzera
+        tk.Button(self.window, text="Atzera", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=20)
+
         self.window.mainloop()
+
+    def atzera(self):
+        self.window.destroy()
+        view.ongietorrileioa.ongietorrileioa().__init__()
+
 
     def printValue(self):
 
