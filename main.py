@@ -1,7 +1,7 @@
 
 from view.ongietorrileioa import ongietorrileioa
-
-
+#from view.abiadurak import abiadurak
+from view.JokatuLeioa import JokatuLeioa
 import view
 
 #prueba

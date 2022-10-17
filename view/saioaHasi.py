@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 import sqlite3
+from view.abiadurak import abiadurak
 
 class saioaHasi(object):
 
@@ -37,7 +38,6 @@ class saioaHasi(object):
             bg="AliceBlue",
             command=self.printValue
         ).pack(pady=20)
-
         self.window.mainloop()
 
     def printValue(self):
@@ -58,7 +58,8 @@ class saioaHasi(object):
 
                 tk.Label(self.window, text='Saioa hasi duzu!', pady=10, padx=200, bg='CadetBlue1',
                          font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
-
+                self.window.destroy()
+                abiadurak()
 
 
 

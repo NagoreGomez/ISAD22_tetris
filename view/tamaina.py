@@ -1,12 +1,14 @@
 import tkinter as tk
-from view.JokatuLeioa import JokatuLeioa
-from view.abiadura import abiadura
 
-class ongietorrileioa(object):
+import view.JokatuLeioa
+from view.JokatuLeioa import JokatuLeioa
+#from view.abiadura import abiadura
+
+class tamaina(object):
 
 
     def __init__(self):
-        super(ongietorrileioa,self).__init__()
+        super(tamaina,self).__init__()
         self.window = tk.Tk()
         self.window.title("Ongi Etorri!")
         self.window.geometry('600x400')
@@ -26,19 +28,11 @@ class ongietorrileioa(object):
 
         self.window.mainloop()
 
-    def saioaHasi(self):
+    def JokatuLeioa(self):
         self.window.destroy()
-        saioaHasi().__init__()
+        JokatuLeioa()
 
-    def erregistratu(self):
+    def abiadura(self):
         self.window.destroy()
-        erregistratu().__init__()
-    def pasahitzaBerreskuratu(self):
-        self.window.destroy()
-        pasahitzaBerreskuratu().__init__()
-    def pasahitzaAldatu(self):
-        self.window.destroy()
-        pasahitzaAldatu().__init__()
-
-
+        view.saioaHasi.abiadurak().__init__()
 
