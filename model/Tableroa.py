@@ -3,7 +3,9 @@ from model import Piezak
 
 
 class Tableroa:
-	def __init__(self, tamaina=(10,20)): #TABLEROAREN TAMAINA
+
+	def __init__(self, tamaina): #TABLEROAREN TAMAINA
+		print(tamaina)
 		self.tamaina = tamaina
 		self.hasieratu_tableroa()
 

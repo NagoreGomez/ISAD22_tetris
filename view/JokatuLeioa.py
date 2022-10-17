@@ -3,16 +3,31 @@ import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
 
+
+abiadura=0
+tamainax=0
+tamainay=0
+
 class JokatuLeioa(object):
 	"""docstring for JokatuLeioa"""
 	
-	def __init__(self):
+	def __init__(self,abiadura2,tamainax2,tamainay2):
 		super(JokatuLeioa, self).__init__()
 		self.window = tk.Tk()
-		self.window.geometry('220x460') #LEHIOAREN TAMAINA
+		self.window.geometry('600x700') #LEHIOAREN TAMAINA
 		self.window.title("Tetris jokoa")
-
+		self.window['bg'] = 'CadetBlue1'
 		
+		self.abiadura = abiadura2
+		self.tamainax = tamainax2
+		self.tamainay = tamainay2
+		global abiadura
+		global tamainax
+		global tamainay
+		abiadura = self.abiadura
+		tamainax = self.tamainax
+		tamainay = self.tamainay
+
 
 		button = tk.Button(self.window, text="Partida hasi")
 		button.pack()
@@ -34,11 +49,15 @@ class JokatuLeioa(object):
 		self.window.mainloop()
 
 class TableroaPanela(tk.Frame):
-	def __init__(self, tamaina=(10,20), gelazka_tamaina=20,puntuazioalabel=None, master=None):
+	# EL TAMAINA DEL DEF NO EZARRITUA
+	def __init__(self, tamaina=(tamainax,tamainay), gelazka_tamaina=20,puntuazioalabel=None, master=None):
 		tk.Frame.__init__(self, master)
+		tamaina = (tamainax,tamainay)
 		self.puntuazio_panela = puntuazioalabel
 		self.tamaina = tamaina
 		self.gelazka_tamaina = gelazka_tamaina
+
+
 
 		self.canvas = tk.Canvas(
 			width=self.tamaina[0]  * self.gelazka_tamaina+1,
@@ -46,8 +65,8 @@ class TableroaPanela(tk.Frame):
 			bg='#eee', borderwidth=0, highlightthickness=0
 		)
 		self.canvas.pack(expand=tk.YES, fill=None)
-
-		self.tab = Tableroa()
+		print(tamaina)
+		self.tab = Tableroa(tamaina)
 		self.jokatzen = None
 		self.tableroa_ezabatu()
 
@@ -87,7 +106,7 @@ class TableroaPanela(tk.Frame):
 				print("GAMEOVER")
 				self.tab.hasieratu_tableroa()
 				return
-		self.jokatzen = self.after(400, self.pausu_bat) #ABIADURA
+		self.jokatzen = self.after(abiadura, self.pausu_bat) #ABIADURA
 		self.marraztu_tableroa()
 
 	def puntuazioa_eguneratu(self):
@@ -118,5 +137,5 @@ class TableroaPanela(tk.Frame):
 		pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
-		self.jokatzen = self.after(400, self.pausu_bat)
+		self.jokatzen = self.after(abiadura, self.pausu_bat)
 		
