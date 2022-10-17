@@ -81,7 +81,6 @@ class erregistratu(object):
         pasahitza=self.pasahitzaE.get()
         gakoa=self.gakoaE.get()
         gakoGaldera=self.gakoGalderaE.get()
-
         if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )&(len(gakoa)!=0 )):
             #begiratu erabiltzaile egokia sortu duen
             cur.execute(
