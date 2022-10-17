@@ -32,6 +32,8 @@ class tamaina(object):
         self.window.destroy()
         JokatuLeioa()
 
+        #aaa
+
     def abiadura(self):
         self.window.destroy()
         view.saioaHasi.abiadurak().__init__()
