@@ -1,5 +1,6 @@
 import tkinter as tk
 from view.JokatuLeioa import JokatuLeioa
+from view.abiadurak import abiadurak
 from view.jokalariakKudeatu import jokalariakKudeatu
 
 class administratzaileLeihoa(object):
@@ -25,7 +26,7 @@ class administratzaileLeihoa(object):
 
     def jokatu(self):
         self.window.destroy()
-        JokatuLeioa().__init__()
+        abiadurak().__init__()
 
     def administratu(self):
         self.window.destroy()
