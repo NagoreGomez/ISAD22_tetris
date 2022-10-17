@@ -42,7 +42,7 @@ class pasahitzaAldatu(object):
             padx=10,
             pady=5,
             bg="AliceBlue",
-            command=self.printValue()
+            command=self.printValue
         ).pack(pady=20)
 
         self.window.mainloop()
