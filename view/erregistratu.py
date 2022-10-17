@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk, CENTER
 from tkinter import *
 import view
 import sqlite3
@@ -83,8 +82,13 @@ class erregistratu(object):
         gakoGaldera=self.gakoGalderaE.get()
         if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )&(len(gakoa)!=0 )):
             #begiratu erabiltzaile egokia sortu duen
-            cur.execute(
-                "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
+            cur.execute("CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
+            res= cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea='admin'")
+            admin = res.fetchone() is None
+            if (admin):
+                cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin naiz?','bai')")
+
+
             res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
             ezDago = res.fetchone() is None
             if (ezDago):
