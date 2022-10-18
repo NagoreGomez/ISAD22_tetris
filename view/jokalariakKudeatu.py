@@ -23,7 +23,7 @@ class jokalariakKudeatu(object):
         button2 = tk.Button(self.window,text="Ezabatu",padx=40,pady=5,command=self.ezabatu)
         button2.pack()
 
-        button3 = tk.Button(self.window,text="Atzera",padx=40,pady=5,command=self.atzera)
+        button3 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.atzera)
         button3.pack()
         self.window.mainloop()
 

@@ -46,7 +46,7 @@ class pasahitzaAldatu(object):
         ).pack(pady=20)
 
         # atzera
-        tk.Button(self.window, text="Atzera", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
+        tk.Button(self.window, text="Itzuli", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
 
         self.window.mainloop()
 

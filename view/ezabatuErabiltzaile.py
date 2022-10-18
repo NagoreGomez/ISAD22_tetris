@@ -22,11 +22,11 @@ class ezabatuErabiltzaile(object):
 
         ezabatu = tk.Button(self.window,text="Ezabatu",padx=10,pady=5,bg="AliceBlue",command=self.ezabatu).pack(pady=15)
 
-        atzera = tk.Button(self.window, text="Atzera", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
+        atzera = tk.Button(self.window, text="Itzuli", padx=10, pady=5, bg="AliceBlue", command=self.itzuli).pack(pady=10)
 
         self.window.mainloop()
 
-    def atzera(self):
+    def itzuli(self):
         self.window.destroy()
         view.jokalariakKudeatu.jokalariakKudeatu()
 

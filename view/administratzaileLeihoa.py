@@ -21,7 +21,7 @@ class administratzaileLeihoa(object):
         button.pack(pady=10)
         button1 = tk.Button(self.window, text="Admistratzaileak kudeatu",padx=40,pady=5, command=self.administratu)
         button1.pack(pady=10)
-        button2 = tk.Button(self.window,text="Atzera",padx=40,pady=5,command=self.atzera)
+        button2 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.itzuli)
         button2.pack(pady=10)
 
         self.window.mainloop()
@@ -34,7 +34,7 @@ class administratzaileLeihoa(object):
         self.window.destroy()
         jokalariakKudeatu().__init__()
 
-    def atzera(self):
+    def itzuli(self):
         self.window.destroy()
         view.saioaHasi.saioaHasi()
 

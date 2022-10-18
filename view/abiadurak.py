@@ -29,7 +29,7 @@ class abiadurak(object):
         self.button2.pack(pady=10)
         button3 = tk.Button(self.window, text="Hautatu", padx=30, pady=5, command=self.tamaina)
         button3.pack(pady=10)
-        button4 = tk.Button(self.window, text="Itzuli",padx=30,pady=5,command=self.atzera)
+        button4 = tk.Button(self.window, text="Itzuli",padx=30,pady=5,command=self.itzuli)
         button4.pack(pady=10)
 
 
@@ -47,7 +47,7 @@ class abiadurak(object):
 
         tamaina(abiadura).__init__()
 
-    def atzera(self):
+    def itzuli(self):
         self.window.destroy()
         view.saioaHasi.saioaHasi().__init__()
 
