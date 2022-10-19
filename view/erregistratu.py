@@ -80,13 +80,13 @@ class erregistratu(object):
         pasahitza=self.pasahitzaE.get()
         gakoa=self.gakoaE.get()
         gakoGaldera=self.gakoGalderaE.get()
-        if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )&(len(gakoa)!=0 )):
+        if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )&(len(gakoGaldera)!=0 ) & (len(gakoa)!=0 )):
             #begiratu erabiltzaile egokia sortu duen
-            cur.execute("CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
+            cur.execute("CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza, gakoGaldera, gakoa)")
             res= cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea='admin'")
             admin = res.fetchone() is None
             if (admin):
-                cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin naiz?','bai')")
+                cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
 
 
             res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
@@ -94,7 +94,7 @@ class erregistratu(object):
             if (ezDago):
                 tk.Label(self.window, text=f'{izena}, erregistratu zara!', pady=10, padx=180,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5,rely=.8,anchor=CENTER)
                 # insert
-                cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)", (erabiltzailea, izena, email, pasahitza,gakoGaldera,gakoa))
+                cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)", (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa))
                 con.commit()
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()

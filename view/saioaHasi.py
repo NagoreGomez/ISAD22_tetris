@@ -62,7 +62,7 @@ class saioaHasi(object):
         admin = res.fetchone() is None
         if (admin):
             cur.execute(
-                "INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin naiz?','bai')")
+                "INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
 
         if ((len(erabiltzailea)!=0) &(len(pasahitza)!=0 )):
             #begiratu saio hastea ondo egin den
