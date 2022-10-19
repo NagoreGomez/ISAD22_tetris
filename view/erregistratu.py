@@ -82,7 +82,7 @@ class erregistratu(object):
         gakoGaldera=self.gakoGalderaE.get()
         if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )&(len(gakoGaldera)!=0 ) & (len(gakoa)!=0 )):
             #begiratu erabiltzaile egokia sortu duen
-            cur.execute("CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza, gakoGaldera, gakoa)")
+            cur.execute("CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza, gakoGaldera, gakoa)")
             res= cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea='admin'")
             admin = res.fetchone() is None
             if (admin):

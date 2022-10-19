@@ -104,7 +104,7 @@ class jokalariakKudeatu(object):
 
 
         #izena
-        cur.execute("SELECT IzenAbizenak FROM Erabiltzaileak")
+        cur.execute("SELECT izenAbizenak FROM Erabiltzaileak")
         res = cur.fetchall()
         i = 100
         for row in res:

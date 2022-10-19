@@ -43,7 +43,20 @@ class saioaHasi(object):
 
         tk.Button(self.window, text="Itzuli", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
 
+
+        #esto hace que solo haya que cerrar esta ventana dos veces y ya
+        def quit():
+            self.window.destroy()
+            self.window.quit()
+
+        self.window.protocol("WM_DELETE_WINDOW", quit)
+
+
         self.window.mainloop()
+
+
+
+
 
     def atzera(self):
         self.window.destroy()
@@ -57,7 +70,7 @@ class saioaHasi(object):
         cur = con.cursor()
 
 
-        cur.execute( "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, IzenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
+        cur.execute( "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
         res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea='admin'")
         admin = res.fetchone() is None
         if (admin):
@@ -88,12 +101,8 @@ class saioaHasi(object):
 
 
 
-
-
-
         else:
             tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)
-
 
 
 
