@@ -1,3 +1,4 @@
+import sys
 from tkinter import *
 import tkinter as tk
 import view
@@ -57,6 +58,8 @@ class pasahitzaBerreskuratu(object):
 
         tk.Button(self.window, text="Itzuli", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
 
+        # lehioa ondo ixteko
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         self.window.mainloop()
 
     def atzera(self):

@@ -1,3 +1,4 @@
+import sys
 import tkinter as tk
 from tkinter import *
 import view
@@ -60,6 +61,8 @@ class erregistratu(object):
 #atzera
         tk.Button(self.window, text="Itzuli", padx=10, pady=5, bg="AliceBlue", command=self.itzuli).pack(pady=10)
 
+        # lehioa ondo ixteko
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         self.window.mainloop()
 
     def itzuli(self):

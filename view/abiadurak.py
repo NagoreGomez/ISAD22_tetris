@@ -1,3 +1,4 @@
+import sys
 import tkinter as tk
 
 
@@ -32,7 +33,8 @@ class abiadurak(object):
         button4 = tk.Button(self.window, text="Itzuli",padx=30,pady=5,command=self.itzuli)
         button4.pack(pady=10)
 
-
+        # lehioa ondo ixteko
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         self.window.mainloop()
 
     def tamaina(self):

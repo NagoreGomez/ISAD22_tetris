@@ -1,3 +1,4 @@
+import sys
 import tkinter as tk
 from view.JokatuLeioa import JokatuLeioa
 from view.abiadurak import abiadurak
@@ -24,6 +25,8 @@ class administratzaileLeihoa(object):
         button2 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.itzuli)
         button2.pack(pady=10)
 
+        # lehioa ondo ixteko
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         self.window.mainloop()
 
     def jokatu(self):

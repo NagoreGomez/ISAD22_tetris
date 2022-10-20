@@ -1,4 +1,5 @@
 import random
+import sys
 import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
@@ -46,6 +47,8 @@ class JokatuLeioa(object):
 		self.window.bind("<Right>", canvas.joku_kontrola)
 		self.window.bind("<Left>", canvas.joku_kontrola)
 
+		# lehioa ondo ixteko
+		self.window.protocol("WM_DELETE_WINDOW", sys.exit)
 		self.window.mainloop()
 
 class TableroaPanela(tk.Frame):

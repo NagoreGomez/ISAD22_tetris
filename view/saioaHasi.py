@@ -1,3 +1,4 @@
+import sys
 from tkinter import *
 import tkinter as tk
 import sqlite3
@@ -44,18 +45,10 @@ class saioaHasi(object):
         tk.Button(self.window, text="Itzuli", padx=10, pady=5, bg="AliceBlue", command=self.atzera).pack(pady=10)
 
 
-        #esto hace que solo haya que cerrar esta ventana dos veces y ya
-        def quit():
-            self.window.destroy()
-            self.window.quit()
-
-        self.window.protocol("WM_DELETE_WINDOW", quit)
-
+        #lehioa ondo ixteko
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)
 
         self.window.mainloop()
-
-
-
 
 
     def atzera(self):

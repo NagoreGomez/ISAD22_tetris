@@ -1,3 +1,4 @@
+import sys
 import tkinter as tk
 from view.saioaHasi import saioaHasi
 from view.erregistratu import erregistratu
@@ -26,6 +27,8 @@ class ongietorrileioa(object):
         button3 = tk.Button(self.window, text="Pasahitza aldatu",padx=30,pady=5,command=self.pasahitzaAldatu)
         button3.pack(pady=10)
 
+        # lehioa ondo ixteko
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         self.window.mainloop()
 
     def saioaHasi(self):

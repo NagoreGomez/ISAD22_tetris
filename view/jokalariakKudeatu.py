@@ -1,4 +1,5 @@
 import sqlite3
+import sys
 import tkinter as tk
 
 from tkinter import *
@@ -154,7 +155,8 @@ class jokalariakKudeatu(object):
         button3 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.atzera)
         button3.place(x=410, y=i+80)
 
-
+        # lehioa ondo ixteko
+        self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         self.window.mainloop()
 
     def ezabatu(self):
