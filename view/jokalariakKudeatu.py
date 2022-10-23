@@ -7,7 +7,6 @@ from tkinter import ttk
 
 import view.administratzaileLeihoa
 #from view.JokatuLeioa import JokatuLeioa
-from view.ezabatuErabiltzaile import ezabatuErabiltzaile
 
 class jokalariakKudeatu(object):
 
@@ -19,40 +18,29 @@ class jokalariakKudeatu(object):
         self.window.geometry('1000x400')
         self.window['bg'] = 'CadetBlue1'
 
+
         """
-     
-        
-        
         #main frame
         main_frame= Frame(self.window)
         main_frame.pack(fill=BOTH, expand=1)
-
         #canvas
         my_canvas= Canvas(main_frame)
         my_canvas.pack(side=LEFT,fill=BOTH,expand=1)
-
         #scrollbar
         my_scrollbar=ttk.Scrollbar(main_frame,orient=VERTICAL,command=my_canvas.yview)
         my_scrollbar.pack(side=RIGHT,fill=Y)
-
-        #confiure canvas
+         #confiure canvas
         my_canvas.configure(yscrollcommand=my_scrollbar.set)
         my_canvas.bind('<Configure>',lambda e:my_canvas.configure(scrollregion=my_canvas.bbox("all")))
-
         #another frame insside canvas
         second_frame= Frame(my_canvas)
-
         #add the new to a window in canvas
         my_canvas.create_window((0,0),window=second_frame,anchor="nw")
-        
+
         """
 
-
-
-
-
-
-        self.Erregistroa = tk.Label(self.window, text="Hauek dira jokalariak", bg='CadetBlue1', font=("Times", 14, "bold"))
+        self.Erregistroa = tk.Label(self.window, text="Hauek dira jokalariak", bg='CadetBlue1',
+                                    font=("Times", 14, "bold"))
         self.Erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)
 
         self.aukera = tk.StringVar()
@@ -60,23 +48,23 @@ class jokalariakKudeatu(object):
         con = sqlite3.connect("datubasea.db")
         cur = con.cursor()
 
-        #taularen goiko aldea
-        self.t1 = tk.Label(self.window, text="Erabiltzailea", bg='CadetBlue1', font=("Times", 12,"bold"))
+        # taularen goiko aldea
+        self.t1 = tk.Label(self.window, text="Erabiltzailea", bg='CadetBlue1', font=("Times", 12, "bold"))
         self.t1.place(x=10, y=70)
 
-        self.t2 = tk.Label(self.window,text="Izen Abizenak",bg='CadetBlue1', font=("Times", 12, "bold"))
+        self.t2 = tk.Label(self.window, text="Izen Abizenak", bg='CadetBlue1', font=("Times", 12, "bold"))
         self.t2.place(x=150, y=70)
 
-        self.t3 = tk.Label(self.window,text="Helbide elektronikoa",bg='CadetBlue1', font=("Times", 12, "bold"))
+        self.t3 = tk.Label(self.window, text="Helbide elektronikoa", bg='CadetBlue1', font=("Times", 12, "bold"))
         self.t3.place(x=300, y=70)
 
-        self.t4 = tk.Label(self.window,text="Pasahitza",bg='CadetBlue1', font=("Times", 12, "bold"))
+        self.t4 = tk.Label(self.window, text="Pasahitza", bg='CadetBlue1', font=("Times", 12, "bold"))
         self.t4.place(x=500, y=70)
 
-        self.t5 = tk.Label(self.window,text="Gako galdera", bg='CadetBlue1', font=("Times", 12, "bold"))
+        self.t5 = tk.Label(self.window, text="Gako galdera", bg='CadetBlue1', font=("Times", 12, "bold"))
         self.t5.place(x=600, y=70)
 
-        self.t6 = tk.Label(self.window,text="Gakoa",bg='CadetBlue1', font=("Times", 12, "bold"))
+        self.t6 = tk.Label(self.window, text="Gakoa", bg='CadetBlue1', font=("Times", 12, "bold"))
         self.t6.place(x=750, y=70)
 
         # botoia
