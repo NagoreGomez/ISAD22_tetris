@@ -15,7 +15,7 @@ class administratzaileLeihoa(object):
         self.window.geometry('600x400')
         self.window['bg'] = 'CadetBlue1'
 
-        self.Erregistroa = tk.Label(self.window, text="Zer egin nahi duzu?", bg='CadetBlue1', font=("Times", 14, "bold"))
+        self.Erregistroa = tk.Label(self.window, text="ADMINISTRATZAILEAREN ORRIA", bg='CadetBlue1', font=("Times", 14, "bold"))
         self.Erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)
 
         button = tk.Button(self.window, text="Jolastu",padx=40,pady=5,command=self.jokatu)

@@ -94,13 +94,14 @@ class erregistratu(object):
 
             res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
             ezDago = res.fetchone() is None
+
             if (ezDago):
                 # insert
                 cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)", (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa))
                 con.commit()
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
-
+                chivato = False
             else:
                 tk.Label(self.window, text=f'{erabiltzailea} erabiltzailea jadanik dago, idatzi beste bat mesedez.', pady=10, padx=90,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8,anchor=CENTER)
         else:
