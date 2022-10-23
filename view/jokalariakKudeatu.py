@@ -156,9 +156,6 @@ class jokalariakKudeatu(object):
         if(ezDago):
             print(-1)
         else:
-            tk.Label(self.window, text=f'{erab}, Bai dago datu basean eta ezabatuko da!', pady=10, padx=180,
-                     font=("Times", 14, "bold"),
-                     bg='CadetBlue1').pack()
             cur.execute("DELETE FROM Erabiltzaileak WHERE erabiltzailea=(?)",(erab,))
             con.commit()
             self.window.destroy()

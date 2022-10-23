@@ -20,7 +20,7 @@ class administratzaileLeihoa(object):
 
         button = tk.Button(self.window, text="Jolastu",padx=40,pady=5,command=self.jokatu)
         button.pack(pady=10)
-        button1 = tk.Button(self.window, text="Admistratzaileak kudeatu",padx=40,pady=5, command=self.administratu)
+        button1 = tk.Button(self.window, text="Jokalariak kudeatu",padx=40,pady=5, command=self.administratu)
         button1.pack(pady=10)
         button2 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.itzuli)
         button2.pack(pady=10)

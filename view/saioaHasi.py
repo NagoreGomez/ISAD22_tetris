@@ -67,8 +67,10 @@ class saioaHasi(object):
         res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea='admin'")
         admin = res.fetchone() is None
         if (admin):
+            print("aaaaaaaaaaaaaaaaaaaaa")
             cur.execute(
                 "INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
+            con.commit()
 
         if ((len(erabiltzailea)!=0) &(len(pasahitza)!=0 )):
             #begiratu saio hastea ondo egin den
@@ -78,13 +80,7 @@ class saioaHasi(object):
                 tk.Label(self.window, text='Pasahitza edo erabiltzailea txarto daude, saiatu berriz mesedez.', pady=10,
                          padx=90, bg='CadetBlue1',
                          font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
-
-
             else:
-
-                tk.Label(self.window, text='Saioa hasi duzu!', pady=10, padx=200, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
-
-
                 if(erabiltzailea=='admin'):
                     self.window.destroy()
                     view.administratzaileLeihoa.administratzaileLeihoa().__init__()

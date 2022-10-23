@@ -36,7 +36,7 @@ class JokatuLeioa(object):
 		puntuazioa = tk.StringVar()
 		puntuazioa.set("Puntuazioa: 0")
 
-		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa)
+		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg='CadetBlue1')
 		puntuazioalabel.pack()
 
 		canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa)

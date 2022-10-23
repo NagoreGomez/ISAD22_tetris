@@ -34,7 +34,7 @@ class pasahitzaAldatu(object):
         self.pasahitzaBerriaL = tk.Label(self.window, text="Pasahitz berria:", bg='CadetBlue1', font=("Times", 11))
         self.pasahitzaBerriaL.place(x=80, y=130)
 
-        self.pasahitzaBerriaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL)
+        self.pasahitzaBerriaE = tk.Entry(self.window, justify=tk.LEFT, state=tk.NORMAL, show="•")
         self.pasahitzaBerriaE.pack(pady=5, padx=5, ipadx=20)
 
         tk.Button(
@@ -67,29 +67,25 @@ class pasahitzaAldatu(object):
         con = sqlite3.connect("datubasea.db")  # konexioa ezarri
         cur = con.cursor()
 
-        if ((len(erabiltzailea)!=0) &(len(pasahitza)!=0 )&(len(pasahitzaBerria)!=0)):
-            #begiratu erabiltzaile eta pasahitz egokia sortu dituen
-            res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND pasahitza=(?)", (erabiltzailea,pasahitza))
+        if ((len(erabiltzailea) != 0) & (len(pasahitza) != 0) & (len(pasahitzaBerria) != 0)):
+            # begiratu erabiltzaile eta pasahitz egokia sortu dituen
+            res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND pasahitza=(?)",
+                                   (erabiltzailea, pasahitza))
             ezDago = res.fetchone() is None
             print(ezDago)
             if (ezDago):
                 tk.Label(self.window, text='Sartutako informazioa ez da egokia, saiatu berriz mesedez.', pady=10,
                          padx=90, bg='CadetBlue1',
                          font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
-
-
-
             else:
-                tk.Label(self.window, text='Pasahitza aldatu duzu!', pady=10, padx=180, bg='CadetBlue1',
-                         font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
                 # update
-                cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)",(pasahitzaBerria, erabiltzailea))
+                cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)",
+                            (pasahitzaBerria, erabiltzailea))
                 con.commit()
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
 
 
         else:
-            tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)
-
-
+            tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10, padx=90, bg='CadetBlue1',
+                     font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)

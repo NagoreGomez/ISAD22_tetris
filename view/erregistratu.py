@@ -90,19 +90,16 @@ class erregistratu(object):
             admin = res.fetchone() is None
             if (admin):
                 cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
-
+                con.commit()
 
             res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
             ezDago = res.fetchone() is None
             if (ezDago):
-                tk.Label(self.window, text=f'{izena}, erregistratu zara!', pady=10, padx=180,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5,rely=.8,anchor=CENTER)
                 # insert
                 cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)", (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa))
                 con.commit()
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
-
-
 
             else:
                 tk.Label(self.window, text=f'{erabiltzailea} erabiltzailea jadanik dago, idatzi beste bat mesedez.', pady=10, padx=90,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8,anchor=CENTER)
