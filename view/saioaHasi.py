@@ -6,6 +6,8 @@ import view
 from view.abiadurak import abiadurak
 from view.administratzaileLeihoa import administratzaileLeihoa
 
+from controller import konexioa
+
 class saioaHasi(object):
 
     def __init__(self):
@@ -59,34 +61,28 @@ class saioaHasi(object):
         erabiltzailea=self.erabiltzaileaE.get()
         pasahitza=self.pasahitzaE.get()
 
-        con = sqlite3.connect("datubasea.db")  # konexioa ezarri
-        cur = con.cursor()
-
-
-        cur.execute( "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
-        res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea='admin'")
-        admin = res.fetchone() is None
-        if (admin):
-            print("aaaaaaaaaaaaaaaaaaaaa")
-            cur.execute(
-                "INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
-            con.commit()
-
         if ((len(erabiltzailea)!=0) &(len(pasahitza)!=0 )):
             #begiratu saio hastea ondo egin den
-            res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND pasahitza=(?)", (erabiltzailea,pasahitza))
-            ezDago = res.fetchone() is None
-            if (ezDago):
-                tk.Label(self.window, text='Pasahitza edo erabiltzailea txarto daude, saiatu berriz mesedez.', pady=10,
+            pasahitza2=konexioa.erabiltzailearenPasahitza(konexioa(),erabiltzailea)
+
+
+            if pasahitza is None: #erabiltzailea ez dago dban
+                tk.Label(self.window, text='Erabiltzailea ez da egokia, saiatu berriz mesedez.', pady=10,
                          padx=90, bg='CadetBlue1',
                          font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
             else:
-                if(erabiltzailea=='admin'):
-                    self.window.destroy()
-                    view.administratzaileLeihoa.administratzaileLeihoa().__init__()
-                else:
-                    self.window.destroy()
-                    view.abiadurak.abiadurak().__init__()
+                if pasahitza2!=pasahitza: #Idatzitako pasahitza ez dagokio erabiltzaile orri
+                    tk.Label(self.window, text='Pasahitza ez dago ondo, saiatu berriz mesedez.',
+                             pady=10,
+                             padx=90, bg='CadetBlue1',
+                             font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
+                else: #Idatzitako pasahitza dagokio erabiltzaile orri
+                    if (erabiltzailea == 'admin'):
+                        self.window.destroy()
+                        view.administratzaileLeihoa.administratzaileLeihoa().__init__()
+                    else:
+                        self.window.destroy()
+                        view.abiadurak.abiadurak().__init__()
 
 
 
