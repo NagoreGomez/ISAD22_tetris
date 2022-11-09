@@ -3,6 +3,7 @@ import tkinter as tk
 from tkinter import *
 import view
 import sqlite3
+from controller import konexioa
 
 
 class erregistratu(object):
@@ -84,26 +85,18 @@ class erregistratu(object):
         gakoa=self.gakoaE.get()
         gakoGaldera=self.gakoGalderaE.get()
         if ((len(izena)!=0 )&(len(erabiltzailea)!=0) &(len(email)!=0 )&(len(pasahitza)!=0 )&(len(gakoGaldera)!=0 ) & (len(gakoa)!=0 )):
-            #begiratu erabiltzaile egokia sortu duen
-            cur.execute("CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza, gakoGaldera, gakoa)")
-            res= cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea='admin'")
-            admin = res.fetchone() is None
-            if (admin):
-                cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
-                con.commit()
-
-            res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
-            ezDago = res.fetchone() is None
-
-            if (ezDago):
-                # insert
-                cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)", (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa))
-                con.commit()
+            erab2=konexioa.erabiltzaileaKonprobatu(konexioa(),erabiltzailea)
+            if erab2 is None:
+                konexioa.erabiltzaileaGehitu(konexioa(),izena,erabiltzailea,email,pasahitza,gakoa,gakoGaldera)
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
-                chivato = False
+
             else:
-                tk.Label(self.window, text=f'{erabiltzailea} erabiltzailea jadanik dago, idatzi beste bat mesedez.', pady=10, padx=90,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8,anchor=CENTER)
+                tk.Label(self.window, text=f'{erabiltzailea} erabiltzailea jadanik dago, idatzi beste bat mesedez.',
+                         pady=10, padx=90, font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8,
+                                                                                              anchor=CENTER)
         else:
-            tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90,font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8,anchor=CENTER)
+            tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10, padx=90,
+                     font=("Times", 14, "bold"), bg='CadetBlue1').place(relx=.5, rely=.8, anchor=CENTER)
+
 

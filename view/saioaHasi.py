@@ -6,7 +6,7 @@ import view
 from view.abiadurak import abiadurak
 from view.administratzaileLeihoa import administratzaileLeihoa
 
-from controller import konexioa
+from controller.konexioa import konexioa
 
 class saioaHasi(object):
 
@@ -83,8 +83,6 @@ class saioaHasi(object):
                     else:
                         self.window.destroy()
                         view.abiadurak.abiadurak().__init__()
-
-
 
         else:
             tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)

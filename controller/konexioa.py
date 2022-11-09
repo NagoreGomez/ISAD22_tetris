@@ -27,6 +27,20 @@ class konexioa(object):
 
 
 
+    def erabiltzaileaKonprobatu(self,erabiltzailea):
+        res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        erab = res.fetchone()
+        if erab is None:
+            return erab
+        else:
+            return erab[0]
+
+
+
+    def erabiltzaileaGehitu(self,izena,erabiltzailea,email,pasahitza,gakoa,gakoGaldera):
+        self.cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)",
+                    (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa))
+        self.con.commit()
 
 
     def konexioa_itxi(self):
