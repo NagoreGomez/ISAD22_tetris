@@ -7,6 +7,7 @@ class konexioa(object):
         super(konexioa, self).__int__()
         self.con=sqlite3.connect("datubasea.db")
         self.cur = self.con.cursor()
+        self.hola="aaa"
 
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
@@ -18,6 +19,9 @@ class konexioa(object):
             self.con.commit()
 
     def erabiltzailearenPasahitza(self,erabiltzailea):
+        print("111")
+        print(self.hola)
+        print("222")
         res = self.cur.execute("SELECT pasahitza FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
         pas = res.fetchone()
         if pas is None:
@@ -28,13 +32,13 @@ class konexioa(object):
 
 
     def erabiltzaileaKonprobatu(self,erabiltzailea):
+        print("haaaaaaaaaaaaaa")
         res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
         erab = res.fetchone()
         if erab is None:
             return erab
         else:
             return erab[0]
-
 
 
     def erabiltzaileaGehitu(self,izena,erabiltzailea,email,pasahitza,gakoa,gakoGaldera):
@@ -45,3 +49,7 @@ class konexioa(object):
 
     def konexioa_itxi(self):
         self.con.close()
+
+
+    def hola(self):
+        print("holaaaaaa")

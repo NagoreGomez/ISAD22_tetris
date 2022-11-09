@@ -17,8 +17,7 @@ class saioaHasi(object):
         self.window.geometry('600x400')
         self.window['bg'] = 'CadetBlue1'
 
-        con = sqlite3.connect("datubasea.db") #konexioa ezarri
-        self.cur = con.cursor()
+
 
         Erregistroa = tk.Label(self.window, text="SAIOA HASTEKO ORRIA", bg='CadetBlue1', font=("Times", 14, "bold"))
         Erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)

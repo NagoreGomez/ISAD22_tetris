@@ -3,6 +3,7 @@ import tkinter as tk
 from view.JokatuLeioa import JokatuLeioa
 from view.abiadurak import abiadurak
 from view.jokalariakKudeatu import jokalariakKudeatu
+from view.pertsonalizatu import pertsonalizatu
 import view
 
 class administratzaileLeihoa(object):
@@ -22,6 +23,8 @@ class administratzaileLeihoa(object):
         button.pack(pady=10)
         button1 = tk.Button(self.window, text="Jokalariak kudeatu",padx=40,pady=5, command=self.administratu)
         button1.pack(pady=10)
+        button3 = tk.Button(self.window, text="Partida pertsonalizatu", padx=40, pady=5, command=self.pertsonalizazioa)
+        button3.pack(pady=10)
         button2 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.itzuli)
         button2.pack(pady=10)
 
@@ -36,6 +39,10 @@ class administratzaileLeihoa(object):
     def administratu(self):
         self.window.destroy()
         jokalariakKudeatu().__init__()
+
+    def pertsonalizazioa(self):
+        self.window.destroy()
+        view.pertsonalizatu.pertsonalizatu()
 
     def itzuli(self):
         self.window.destroy()
