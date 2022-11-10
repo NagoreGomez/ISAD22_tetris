@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import *
 import view
 import sqlite3
-from controller.konexioa import konexioa
+from controller.konexioa import Konexioa
 
 
 class erregistratu(object):
@@ -79,9 +79,9 @@ class erregistratu(object):
         if ((len(izena) != 0) & (len(erabiltzailea) != 0) & (len(email) != 0) & (len(pasahitza) != 0) & (
                 len(gakoGaldera) != 0) & (len(gakoa) != 0)):
 
-            erab2 = konexioa.erabiltzaileaKonprobatu(konexioa(), erabiltzailea)
+            erab2 = Konexioa.erabiltzaileaKonprobatu(Konexioa(), erabiltzailea)
             if erab2 is None:
-                konexioa.erabiltzaileaGehitu(konexioa(), izena, erabiltzailea, email, pasahitza, gakoa, gakoGaldera)
+                Konexioa.erabiltzaileaGehitu(Konexioa(), izena, erabiltzailea, email, pasahitza, gakoa, gakoGaldera)
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
 

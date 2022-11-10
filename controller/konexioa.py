@@ -1,38 +1,34 @@
 import sqlite3
 
 
-class konexioa(object):
+class Konexioa(object):
 
-    def __int__(self):
-        super(konexioa, self).__int__()
+    def __init__(self):
+        super(Konexioa, self).__init__()
         self.con=sqlite3.connect("datubasea.db")
         self.cur = self.con.cursor()
-        self.hola="aaa"
 
         self.cur.execute(
             "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
 
-        res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea=admin")
+        res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea='admin'")
 
         if res.fetchone() is None:
             self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
             self.con.commit()
 
-    def erabiltzailearenPasahitza(self,erabiltzailea):
-        print("111")
-        print(self.hola)
-        print("222")
+    def erabiltzailearenPasahitza (self,erabiltzailea):
         res = self.cur.execute("SELECT pasahitza FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
         pas = res.fetchone()
         if pas is None:
             return pas
+            print(pas)
         else:
             return pas[0]
-
+            print(pas[0])
 
 
     def erabiltzaileaKonprobatu(self,erabiltzailea):
-        print("haaaaaaaaaaaaaa")
         res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
         erab = res.fetchone()
         if erab is None:

@@ -4,6 +4,7 @@ from tkinter import *
 import view
 from view.abiadurak import abiadurak
 
+
 class pertsonalizatu(object):
     def __init__(self):
         super(pertsonalizatu,self).__init__()
@@ -63,11 +64,11 @@ class pertsonalizatu(object):
         self.atzekoKolorea3 = tk.Radiobutton(self.window,variable=self.aukeraSoinu, text="C", value=3, bg='CadetBlue1', font=("Times", 12))
         self.atzekoKolorea3.place(x=300, y=260)
 
-        button2 = tk.Button(self.window, text="Hautatu", padx=30, pady=5, command=self.pertsonalizazioa)
-        button2.place(x=150, y=300)
+        button2 = tk.Button(self.window, text="Pertsonalizazioa gorde", padx=30, pady=5, command=self.pertsonalizazioa)
+        button2.place(x=110, y=300)
 
         button3 = tk.Button(self.window, text="Itzuli", padx=40, pady=5, command=self.itzuli)
-        button3.place(x=300, y=300)
+        button3.place(x=310, y=300)
 
 
         self.window.mainloop()
@@ -107,6 +108,13 @@ class pertsonalizatu(object):
         print(fondoa)
         print(adreilua)
         print(soinua)
-        abiadurak().__init__()
+
+        #para conseguir cual es el admin y guardar la personalizacion y demas
+        #erabiltzailea= saioaHasi.getErabiltzailea(saioaHasi())
+        #erabiltzailea=view.saioaHasi.getErabiltzailea(self)
+        #print(erabiltzailea)
+
+        #mirar lo de maitane
+
 
 

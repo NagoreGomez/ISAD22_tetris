@@ -1,5 +1,7 @@
 import sys
 import tkinter as tk
+
+import view
 from view.saioaHasi import saioaHasi
 from view.erregistratu import erregistratu
 from view.pasahitzaAldatu import pasahitzaAldatu
@@ -33,17 +35,17 @@ class ongietorrileioa(object):
 
     def saioaHasi(self):
         self.window.destroy()
-        saioaHasi().__init__()
+        view.saioaHasi.saioaHasi().__init__()
 
     def erregistratu(self):
         self.window.destroy()
-        erregistratu().__init__()
+        view.erregistratu.erregistratu().__init__()
     def pasahitzaBerreskuratu(self):
         self.window.destroy()
-        pasahitzaBerreskuratu().__init__()
+        view.pasahitzaBerreskuratu.pasahitzaBerreskuratu().__init__()
     def pasahitzaAldatu(self):
         self.window.destroy()
-        pasahitzaAldatu().__init__()
+        view.pasahitzaAldatu.pasahitzaAldatu().__init__()
 
 
 

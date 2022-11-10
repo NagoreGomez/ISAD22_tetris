@@ -1,14 +1,11 @@
 
 from view.ongietorrileioa import ongietorrileioa
-from controller.konexioa import konexioa
-from view.administratzaileLeihoa import administratzaileLeihoa
+from controller.konexioa import Konexioa
 
-#prueba
 
 if __name__ == '__main__':
-	konexioa().__init__()
-	administratzaileLeihoa();
-	#tetris = ongietorrileioa();
+	Konexioa().__init__()
+	tetris = ongietorrileioa();
 
 
 
