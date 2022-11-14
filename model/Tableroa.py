@@ -44,6 +44,7 @@ class Tableroa:
 		self.puntuazioa += (i-1)*2
 
 	def sartu_pieza(self,pieza):
+
 		x = -pieza.min_x()
 		self.posizioa = (x,(self.tamaina[0]//2)-1)
 		self.pieza = pieza

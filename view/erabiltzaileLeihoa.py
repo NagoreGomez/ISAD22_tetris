@@ -6,8 +6,9 @@ from view.pertsonalizatu import pertsonalizatu
 
 class erabiltzaileLeihoa(object):
 
-    def __init__(self):
+    def __init__(self,erabiltzailea):
         super(erabiltzaileLeihoa,self).__init__()
+        self.erabiltzailea=erabiltzailea
         self.window = tk.Tk()
         self.window.title("Erabiltzaile menua")
         self.window.geometry('600x400')
@@ -29,12 +30,12 @@ class erabiltzaileLeihoa(object):
 
     def jokatu(self):
         self.window.destroy()
-        view. abiadurak.abiadurak().__init__()
+        view.abiadurak.abiadurak().__init__()
 
 
     def pertsonalizazioa(self):
         self.window.destroy()
-        view.pertsonalizatu.pertsonalizatu()
+        view.pertsonalizatu.pertsonalizatu(self.erabiltzailea)
 
     def itzuli(self):
         self.window.destroy()

@@ -3,11 +3,13 @@ import tkinter as tk
 from tkinter import *
 import view
 from view.abiadurak import abiadurak
+from controller.konexioa import Konexioa
 
 
 class pertsonalizatu(object):
-    def __init__(self):
+    def __init__(self,erabiltzailea):
         super(pertsonalizatu,self).__init__()
+        self.erabiltzailea=erabiltzailea
         self.window = tk.Tk()
         self.window.title("Pertsonalizazio menua")
         self.window.geometry('600x400')
@@ -78,43 +80,48 @@ class pertsonalizatu(object):
         view.administratzaileLeihoa.administratzaileLeihoa()
 
     def pertsonalizazioa(self):
-        self.window.destroy()
 
-        fondoa="a"
+        self.fondoa="a"
 
         if (self.aukeraFondoa.get() == 1):
-            fondoa = "Blue"
+            self.fondoa = "#98F5FF"
         elif (self.aukeraFondoa.get() == 2):
-            fondoa = "Green"
+            self.fondoa= "#00C957"
         elif (self.aukeraFondoa.get() == 3):
-            fondoa = "Red"
+            self.fondoa = "#FF3030"
 
-        adreilua = "a"
+        self.adreiluak = "a"
         if (self.aukeraAdreilu.get() == 1):
-            adreilua = "Beroak"
+            self.adreiluak = "1"
         elif (self.aukeraAdreilu.get() == 2):
-            adreilua = "Hotzak"
+            self.adreiluak = "2"
         elif (self.aukeraAdreilu.get() == 3):
-            adreilua = "Koloretakoak"
+            self.adreiluak = "3"
 
-        soinua = "a"
+        self.soinua = "a"
         if (self.aukeraSoinu.get() == 1):
-            soinua = "A"
+            self.soinua = "1"
         elif (self.aukeraSoinu.get() == 2):
-            soinua = "B"
+            self.soinua = "2"
         elif (self.aukeraSoinu.get() == 3):
-            soinua = "C"
+            self.soinua = "3"
 
-        print(fondoa)
-        print(adreilua)
-        print(soinua)
+        print( self.fondoa)
+        print(self.adreiluak)
+        print(self.soinua)
 
-        #para conseguir cual es el admin y guardar la personalizacion y demas
-        #erabiltzailea= saioaHasi.getErabiltzailea(saioaHasi())
-        #erabiltzailea=view.saioaHasi.getErabiltzailea(self)
-        #print(erabiltzailea)
+        #guardar en la db
+        Konexioa.pertsonalizazioaGorde(Konexioa(), self.fondoa,self.adreiluak,self.soinua,self.erabiltzailea)
 
-        #mirar lo de maitane
+        #volver al menu
+        if (self.erabiltzailea == 'admin'):
+            self.window.destroy()
+            # if(self.erabiltzailea is not None):
+            view.administratzaileLeihoa.administratzaileLeihoa(self.erabiltzailea).__init__()
+        else:
+            self.window.destroy()
+            # if (self.erabiltzailea is not None):
+            view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
 
 
 

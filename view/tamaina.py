@@ -1,9 +1,9 @@
 import sys
 import tkinter as tk
 
-
 import view
 from view.JokatuLeioa import JokatuLeioa
+
 
 
 abiadura=0
@@ -11,8 +11,9 @@ abiadura=0
 class tamaina(object):
 
 
-    def __init__(self,abiadura2):
+    def __init__(self,abiadura2, erabiltzailea):
         super(tamaina,self).__init__()
+        self.erabiltzailea = erabiltzailea
         self.window = tk.Tk()
         self.window.title("Ongi Etorri!")
         self.window.geometry('600x400')
@@ -56,8 +57,7 @@ class tamaina(object):
         elif (self.aukera.get() == 3):
             tamainax = 20
             tamainay = 30
-        JokatuLeioa(abiadura,tamainax, tamainay).__init__()
-
+        view.JokatuLeioa.JokatuLeioa(abiadura,tamainax, tamainay,self.erabiltzailea).__init__()
 
     def itzuli(self):
         self.window.destroy()

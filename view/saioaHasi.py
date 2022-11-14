@@ -77,18 +77,14 @@ class saioaHasi(object):
                 else: #Idatzitako pasahitza dagokio erabiltzaile orri
                     if (self.erabiltzailea == 'admin'):
                         self.window.destroy()
-                        view.administratzaileLeihoa.administratzaileLeihoa().__init__()
-
+                        #if(self.erabiltzailea is not None):
+                        view.administratzaileLeihoa.administratzaileLeihoa(self.erabiltzailea).__init__()
                     else:
                         self.window.destroy()
-                        view.erabiltzaileLeihoa.erabiltzaileLeihoa().__init__()
-
+                        #if (self.erabiltzailea is not None):
+                        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
         else:
             tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)
 
 
 
-
-    def getErabiltzailea (self):
-        erab=self.erabiltzailea
-        return erab

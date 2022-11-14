@@ -1,7 +1,10 @@
+from controller.konexioa import Konexioa
+
 class Pieza:
 	def __init__(self, forma, kolorea):
 		self.forma = forma
 		self.kolorea = kolorea
+
 
 	def get_kolorea(self):
 		return self.kolorea
@@ -39,7 +42,10 @@ class Pieza:
 
 class Laukia(Pieza):
 	def __init__(self, kolorea=None):
+		#self erabiltzaileaaaaaaaaaaaaaaaaaaaaaaaaaaa
 		super(Laukia, self).__init__([[0,0],[0,1],[1,0],[1,1]], kolorea='yellow')
+
+
 
 class Zutabea(Pieza):
 	def __init__(self, kolorea=None):

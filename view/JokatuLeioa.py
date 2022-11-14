@@ -3,6 +3,7 @@ import sys
 import tkinter as tk
 from model.Tableroa import Tableroa
 from model.Piezak import *
+from controller.konexioa import Konexioa
 
 
 abiadura=0
@@ -11,14 +12,47 @@ tamainay=0
 
 class JokatuLeioa(object):
 	"""docstring for JokatuLeioa"""
-	
-	def __init__(self,abiadura2,tamainax2,tamainay2):
+
+	def __init__(self,abiadura2,tamainax2,tamainay2,erab):
 		super(JokatuLeioa, self).__init__()
+
 		self.window = tk.Tk()
 		self.window.geometry('600x700') #LEHIOAREN TAMAINA
 		self.window.title("Tetris jokoa")
-		self.window['bg'] = 'CadetBlue1'
-		
+
+		self.erabiltzailea = erab
+		global erabiltzailea
+		erabiltzailea=self.erabiltzailea
+
+
+		#koloreaLortu
+		fondoa=Konexioa.getAtzekoKolorea(Konexioa(), self.erabiltzailea)
+		print(fondoa)
+		#kolorea ezarri
+		self.window['bg'] = fondoa
+
+		#adreilu koloreak
+		#Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma
+		adreiluak = Konexioa.getAdreiluak(Konexioa(), self.erabiltzailea)
+		print(adreiluak)
+		if(adreiluak==1):
+			self.laukiKol='blue'
+			zutabeKol= 'blue'
+			lForma= 'blue'
+			lFormaAlderantzizkoKol= 'blue'
+			zFormaKol= 'blue'
+			zFormaAlderantzizkoKol= 'blue'
+			tFormaKol='blue'
+		elif(adreiluak==2):
+			laukiKol = 'blue'
+		else:
+			laukiKol = 'blue'
+
+
+		#soinua
+
+
+
 		self.abiadura = abiadura2
 		self.tamainax = tamainax2
 		self.tamainay = tamainay2
@@ -36,7 +70,7 @@ class JokatuLeioa(object):
 		puntuazioa = tk.StringVar()
 		puntuazioa.set("Puntuazioa: 0")
 
-		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg='CadetBlue1')
+		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg=fondoa)
 		puntuazioalabel.pack()
 
 		canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa)
@@ -68,7 +102,7 @@ class TableroaPanela(tk.Frame):
 			bg='#eee', borderwidth=0, highlightthickness=0
 		)
 		self.canvas.pack(expand=tk.YES, fill=None)
-		print(tamaina)
+		#print(tamaina)
 		self.tab = Tableroa(tamaina)
 		self.jokatzen = None
 		self.tableroa_ezabatu()
@@ -97,6 +131,7 @@ class TableroaPanela(tk.Frame):
 
 
 	def pausu_bat(self):
+		self.erabiltzailea=erabiltzailea
 		try:
 			self.tab.betetako_lerroak_ezabatu()
 			self.tab.mugitu_behera()
@@ -108,6 +143,7 @@ class TableroaPanela(tk.Frame):
 			except Exception as e:
 				print("GAMEOVER")
 				self.tab.hasieratu_tableroa()
+
 				return
 		self.jokatzen = self.after(abiadura, self.pausu_bat) #ABIADURA
 		self.marraztu_tableroa()
@@ -116,7 +152,7 @@ class TableroaPanela(tk.Frame):
 		if self.puntuazio_panela:
 			self.puntuazio_panela.set(f"Puntuazioa: {self.tab.puntuazioa}")
 
-		
+
 
 	def joku_kontrola(self, event):
 		try:
@@ -134,6 +170,7 @@ class TableroaPanela(tk.Frame):
 			self.marraztu_tableroa()
 
 	def jolastu(self):
+		self.erabiltzailea = erabiltzailea
 		if self.jokatzen:
 			self.after_cancel(self.jokatzen)
 		self.tab.hasieratu_tableroa()
@@ -141,4 +178,4 @@ class TableroaPanela(tk.Frame):
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
 		self.jokatzen = self.after(abiadura, self.pausu_bat)
-		
+

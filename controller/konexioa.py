@@ -9,12 +9,12 @@ class Konexioa(object):
         self.cur = self.con.cursor()
 
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa)")
+            "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa,fondoa,adreiluak,soinua)")
 
         res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea='admin'")
 
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai')")
+            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','a','a','a')")
             self.con.commit()
 
     def erabiltzailearenPasahitza (self,erabiltzailea):
@@ -47,5 +47,17 @@ class Konexioa(object):
         self.con.close()
 
 
-    def hola(self):
-        print("holaaaaaa")
+    def pertsonalizazioaGorde(self,kolorea,adreiluak,soinua,erabiltzailea):
+        self.cur.execute("UPDATE Erabiltzaileak SET fondoa=(?), adreiluak=(?), soinua=(?) WHERE erabiltzailea=(?)",  (kolorea,adreiluak,soinua,erabiltzailea))
+        self.con.commit()
+
+
+    def getAtzekoKolorea(self,erabiltzailea):
+        res=self.cur.execute("SELECT fondoa FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        fondoa = res.fetchone()
+        return fondoa[0]
+
+    def getAdreiluak(self,erabiltzailea):
+        res=self.cur.execute("SELECT adreiluak FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        adreiluak = res.fetchone()
+        return adreiluak[0]

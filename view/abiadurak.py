@@ -8,8 +8,9 @@ from view.tamaina import tamaina
 class abiadurak(object):
 
 
-    def __init__(self):
+    def __init__(self,erabiltzailea):
         super(abiadurak,self).__init__()
+        self.erabiltzailea = erabiltzailea
         self.window = tk.Tk()
         self.window.title("Ongi Etorri!")
         self.window.geometry('600x400')
@@ -47,7 +48,7 @@ class abiadurak(object):
         elif (self.aukera.get() == 3):
             abiadura = 100
 
-        tamaina(abiadura).__init__()
+        tamaina(abiadura,self.erabiltzailea).__init__()
 
     def itzuli(self):
         self.window.destroy()
