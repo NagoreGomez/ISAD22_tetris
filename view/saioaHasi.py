@@ -5,7 +5,7 @@ import sqlite3
 import view
 from controller.konexioa import Konexioa
 from view.erabiltzaileLeihoa import erabiltzaileLeihoa
-from view.administratzaileLeihoa import administratzaileLeihoa
+
 
 class saioaHasi(object):
 
@@ -75,14 +75,10 @@ class saioaHasi(object):
                              padx=90, bg='CadetBlue1',
                              font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
                 else: #Idatzitako pasahitza dagokio erabiltzaile orri
-                    if (self.erabiltzailea == 'admin'):
-                        self.window.destroy()
-                        #if(self.erabiltzailea is not None):
-                        view.administratzaileLeihoa.administratzaileLeihoa(self.erabiltzailea).__init__()
-                    else:
-                        self.window.destroy()
-                        #if (self.erabiltzailea is not None):
-                        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
+                    self.window.destroy()
+                    #if(self.erabiltzailea is not None):
+                    view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
+
         else:
             tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)
 

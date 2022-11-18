@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-import view.administratzaileLeihoa
+import view.erabiltzaileLeihoa
 #from view.JokatuLeioa import JokatuLeioa
 
 class jokalariakKudeatu(object):
@@ -19,25 +19,6 @@ class jokalariakKudeatu(object):
         self.window['bg'] = 'CadetBlue1'
 
 
-        """
-        #main frame
-        main_frame= Frame(self.window)
-        main_frame.pack(fill=BOTH, expand=1)
-        #canvas
-        my_canvas= Canvas(main_frame)
-        my_canvas.pack(side=LEFT,fill=BOTH,expand=1)
-        #scrollbar
-        my_scrollbar=ttk.Scrollbar(main_frame,orient=VERTICAL,command=my_canvas.yview)
-        my_scrollbar.pack(side=RIGHT,fill=Y)
-         #confiure canvas
-        my_canvas.configure(yscrollcommand=my_scrollbar.set)
-        my_canvas.bind('<Configure>',lambda e:my_canvas.configure(scrollregion=my_canvas.bbox("all")))
-        #another frame insside canvas
-        second_frame= Frame(my_canvas)
-        #add the new to a window in canvas
-        my_canvas.create_window((0,0),window=second_frame,anchor="nw")
-
-        """
 
         self.Erregistroa = tk.Label(self.window, text="JOKALARIAK KUDEATZEKO ORRIA", bg='CadetBlue1',
                                     font=("Times", 14, "bold"))
@@ -168,4 +149,4 @@ class jokalariakKudeatu(object):
 
     def atzera(self):
         self.window.destroy()
-        view.administratzaileLeihoa.administratzaileLeihoa()
+        view.erabiltzaileLeihoa.erabiltzaileLeihoa()

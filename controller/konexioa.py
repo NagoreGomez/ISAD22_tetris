@@ -9,12 +9,12 @@ class Konexioa(object):
         self.cur = self.con.cursor()
 
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa,fondoa,adreiluak,soinua)")
+            "CREATE TABLE IF NOT EXISTS Erabiltzaileak(erabiltzailea, izenAbizenak, helbideElektronikoa, pasahitza,gakoGaldera,gakoa,fondoa,adreiluak,soinua, puntuak, partida)")
 
         res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea='admin'")
 
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','a','a','a')")
+            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','CadetBlue1','CadetBlue1','a', '0', '#')")
             self.con.commit()
 
     def erabiltzailearenPasahitza (self,erabiltzailea):
@@ -37,9 +37,9 @@ class Konexioa(object):
             return erab[0]
 
 
-    def erabiltzaileaGehitu(self,izena,erabiltzailea,email,pasahitza,gakoa,gakoGaldera):
-        self.cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?)",
-                    (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa))
+    def erabiltzaileaGehitu(self,izena,erabiltzailea,email,pasahitza,gakoa,gakoGaldera,fondoa,adreiluak,soinua,puntuak, partida):
+        self.cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?,?,?,?,?,?)",
+                    (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa,fondoa,adreiluak,soinua,puntuak, partida))
         self.con.commit()
 
 
@@ -61,3 +61,21 @@ class Konexioa(object):
         res=self.cur.execute("SELECT adreiluak FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
         adreiluak = res.fetchone()
         return adreiluak[0]
+
+
+    def partidaGorde(self,erabiltzailea, partida, puntuak):
+        self.cur.execute("UPDATE Erabiltzaileak SET partida=(?), puntuak=(?) WHERE erabiltzailea=(?)",
+                         (partida, puntuak, erabiltzailea))
+        self.con.commit()
+
+    def partidaKargatu(self,erabiltzailea):
+        res=self.cur.execute("SELECT partida FROM Erabiltzaileak WHERE erabiltzailea=(?)",
+                         (erabiltzailea,))
+        partida=res.fetchone()
+        return partida[0]
+
+    def puntuakLortu(self, erabiltzailea):
+        res = self.cur.execute("SELECT puntuak FROM Erabiltzaileak WHERE erabiltzailea=(?)",
+                               (erabiltzailea,))
+        puntuak = res.fetchone()
+        return puntuak[0]

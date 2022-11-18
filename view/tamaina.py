@@ -2,7 +2,7 @@ import sys
 import tkinter as tk
 
 import view
-from view.JokatuLeioa import JokatuLeioa
+from view.JokatuLeihoa import JokatuLeihoa
 
 
 
@@ -57,9 +57,12 @@ class tamaina(object):
         elif (self.aukera.get() == 3):
             tamainax = 20
             tamainay = 30
-        view.JokatuLeioa.JokatuLeioa(abiadura,tamainax, tamainay,self.erabiltzailea).__init__()
+
+        puntuak=0
+        partida=None
+        view.JokatuLeihoa.JokatuLeihoa(abiadura,tamainax, tamainay,self.erabiltzailea,puntuak, partida ).__init__()
 
     def itzuli(self):
         self.window.destroy()
-        view.abiadurak.abiadurak().__init__()
+        view.abiadurak.abiadurak(self.erabiltzailea).__init__()
 

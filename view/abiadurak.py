@@ -3,7 +3,7 @@ import tkinter as tk
 
 
 import view
-from view.JokatuLeioa import JokatuLeioa
+from view.JokatuLeihoa import JokatuLeihoa
 from view.tamaina import tamaina
 class abiadurak(object):
 
@@ -52,5 +52,5 @@ class abiadurak(object):
 
     def itzuli(self):
         self.window.destroy()
-        view.saioaHasi.saioaHasi().__init__()
+        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
 

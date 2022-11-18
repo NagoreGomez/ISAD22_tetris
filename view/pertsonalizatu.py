@@ -77,7 +77,7 @@ class pertsonalizatu(object):
 
     def itzuli(self):
         self.window.destroy()
-        view.administratzaileLeihoa.administratzaileLeihoa()
+        view.erabiltzaileLeihoa.erabiltzaileLeihoa()
 
     def pertsonalizazioa(self):
 
@@ -114,14 +114,9 @@ class pertsonalizatu(object):
         Konexioa.pertsonalizazioaGorde(Konexioa(), self.fondoa,self.adreiluak,self.soinua,self.erabiltzailea)
 
         #volver al menu
-        if (self.erabiltzailea == 'admin'):
-            self.window.destroy()
-            # if(self.erabiltzailea is not None):
-            view.administratzaileLeihoa.administratzaileLeihoa(self.erabiltzailea).__init__()
-        else:
-            self.window.destroy()
-            # if (self.erabiltzailea is not None):
-            view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
+        self.window.destroy()
+        # if(self.erabiltzailea is not None):
+        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
 
 
 

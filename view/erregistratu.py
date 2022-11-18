@@ -80,8 +80,16 @@ class erregistratu(object):
                 len(gakoGaldera) != 0) & (len(gakoa) != 0)):
 
             erab2 = Konexioa.erabiltzaileaKonprobatu(Konexioa(), erabiltzailea)
+
+            #default balioak   PROBARRR
+            fondoa='CadetBlue1'
+            adreiluak='CadetBlue1'
+            soinua='a'
+            puntuak=0
+            partida='#'
+
             if erab2 is None:
-                Konexioa.erabiltzaileaGehitu(Konexioa(), izena, erabiltzailea, email, pasahitza, gakoa, gakoGaldera)
+                Konexioa.erabiltzaileaGehitu(Konexioa(), izena, erabiltzailea, email, pasahitza, gakoa, gakoGaldera,fondoa,adreiluak,soinua,puntuak, partida)
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
 

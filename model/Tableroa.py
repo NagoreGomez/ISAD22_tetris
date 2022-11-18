@@ -9,6 +9,22 @@ class Tableroa:
 		self.tamaina = tamaina
 		self.hasieratu_tableroa()
 
+	# metodooooo
+	def kargatu_partida(self, partida):
+		datuak = str(partida).split(sep='#')
+		self.hasieratu_tableroa()
+		self.puntuazioa = int(datuak.pop(0))
+		datuak.pop(0) #tamainax
+		datuak.pop(0) #tamainay
+		datuak.pop(0) #abiadura
+		for i in range(self.tamaina[1]):
+			for j in range(self.tamaina[0]):
+				unekoa = datuak.pop(0)
+				if unekoa.__eq__("None"):
+					self.tab[i][j] = None
+				else:
+					self.tab[i][j] = unekoa
+
 	def hasieratu_tableroa(self):
 		self.tab = [ [ None for y in range(self.tamaina[0])]for x in range(self.tamaina[1])]
 		self.pieza = None

@@ -1,6 +1,8 @@
 import random
 import sys
 import tkinter as tk
+
+import view.ongietorrileioa
 from model.Tableroa import Tableroa
 from model.Piezak import *
 from controller.konexioa import Konexioa
@@ -10,11 +12,13 @@ abiadura=0
 tamainax=0
 tamainay=0
 
-class JokatuLeioa(object):
+class JokatuLeihoa(object):
 	"""docstring for JokatuLeioa"""
 
-	def __init__(self,abiadura2,tamainax2,tamainay2,erab):
-		super(JokatuLeioa, self).__init__()
+	def __init__(self,abiadura2,tamainax2,tamainay2,erab, puntuak, partida):
+		super(JokatuLeihoa, self).__init__()
+
+
 
 		self.window = tk.Tk()
 		self.window.geometry('600x700') #LEHIOAREN TAMAINA
@@ -67,32 +71,62 @@ class JokatuLeioa(object):
 		button = tk.Button(self.window, text="Partida hasi")
 		button.pack()
 
+
 		puntuazioa = tk.StringVar()
-		puntuazioa.set("Puntuazioa: 0")
+		puntuazioa.set(f"Puntuazioa: {puntuak}")
 
 		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg=fondoa)
 		puntuazioalabel.pack()
 
-		canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa)
-		button.configure(command=canvas.jolastu)
-		canvas.pack()
-		self.window.bind("<Up>", canvas.joku_kontrola)
-		self.window.bind("<Down>", canvas.joku_kontrola)
-		self.window.bind("<Right>", canvas.joku_kontrola)
-		self.window.bind("<Left>", canvas.joku_kontrola)
+		print(tamainax)
+		print(tamainay)
+		print(abiadura)
+		print("aaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+		self.canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa, tamaina=(tamainax,tamainay), partida=partida)
+
+		button.configure(command=self.canvas.jolastu)
+		self.canvas.pack()
+
+		#botonnnnnnnnnnnnnnnnnnnnnnnn
+		if self.erabiltzailea is not None:
+			button2 = tk.Button(self.window, text="Partida gorde", command=self.partidaGorde)
+			button2.pack()
+
+		self.window.bind("<Up>", self.canvas.joku_kontrola)
+		self.window.bind("<Down>", self.canvas.joku_kontrola)
+		self.window.bind("<Right>", self.canvas.joku_kontrola)
+		self.window.bind("<Left>", self.canvas.joku_kontrola)
 
 		# lehioa ondo ixteko
 		self.window.protocol("WM_DELETE_WINDOW", sys.exit)
 		self.window.mainloop()
 
+	def partidaGorde (self):
+		self.canvas.after_cancel(self.canvas.jokatzen)
+		matrizea = self.canvas.tab
+		gorde = str(matrizea.puntuazioa) + "#" + str(tamainax) + "#" + str(tamainay) + "#" + str(self.abiadura) + "#"
+		for i in range(matrizea.tamaina[1]):
+			for j in range(matrizea.tamaina[0]):
+
+				if matrizea.tab[i][j] is None:
+					gorde = gorde + "None#"
+				else:
+					gorde = gorde + matrizea.tab[i][j] + "#"
+		Konexioa.partidaGorde(Konexioa(), self.erabiltzailea, gorde, self.canvas.tab.puntuazioa)
+		self.window.destroy()
+
+		view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
+
 class TableroaPanela(tk.Frame):
 	# EL TAMAINA DEL DEF NO EZARRITUA
-	def __init__(self, tamaina=(tamainax,tamainay), gelazka_tamaina=20,puntuazioalabel=None, master=None):
+	def __init__(self, tamaina=(tamainax,tamainay), gelazka_tamaina=20,puntuazioalabel=None, master=None, partida=None):
 		tk.Frame.__init__(self, master)
 		tamaina = (tamainax,tamainay)
 		self.puntuazio_panela = puntuazioalabel
 		self.tamaina = tamaina
 		self.gelazka_tamaina = gelazka_tamaina
+		self.partida=partida
 
 
 
@@ -121,6 +155,7 @@ class TableroaPanela(tk.Frame):
 		for i in range(self.tab.tamaina[1]):
 			for j in range(self.tab.tamaina[0]):
 				if self.tab.tab[i][j]:
+					print(self.tab.tab[i][j])
 					self.marratu_gelazka(j,i,self.tab.tab[i][j])
 		if self.tab.pieza:
 			for i in range(4):
@@ -170,10 +205,12 @@ class TableroaPanela(tk.Frame):
 			self.marraztu_tableroa()
 
 	def jolastu(self):
-		self.erabiltzailea = erabiltzailea
 		if self.jokatzen:
 			self.after_cancel(self.jokatzen)
-		self.tab.hasieratu_tableroa()
+		if self.partida is not None:
+			self.tab.kargatu_partida(self.partida)
+		else:
+			self.tab.hasieratu_tableroa()
 		pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
