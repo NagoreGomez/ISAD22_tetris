@@ -18,6 +18,7 @@ class Pieza:
 	def set_y(self, i,b):
 		self.forma[i][1] = b
 
+
 	def biratuEzkerrera(self):
 		for i in range(4):
 			aurr_x = self.get_x(i)
@@ -46,9 +47,12 @@ class Laukia(Pieza):
 
 
 
+
 class Zutabea(Pieza):
 	def __init__(self, kolorea=None):
 		super(Zutabea, self).__init__([[0,-1],[0,0],[0,1],[0,2]], kolorea='cyan')
+
+
 
 class Lforma(Pieza):
 	def __init__(self, kolorea=None):

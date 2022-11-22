@@ -7,13 +7,15 @@ from tkinter import ttk
 
 import view.erabiltzaileLeihoa
 #from view.JokatuLeioa import JokatuLeioa
+from controller.konexioa import Konexioa
 
 class jokalariakKudeatu(object):
 
 
-    def __init__(self):
+    def __init__(self,erabiltzailea):
         super(jokalariakKudeatu,self).__init__()
         self.window = tk.Tk()
+        self.erabiltzailea=erabiltzailea
         self.window.title("Jokalariak kudeatzeko menua")
         self.window.geometry('1000x400')
         self.window['bg'] = 'CadetBlue1'
@@ -26,8 +28,7 @@ class jokalariakKudeatu(object):
 
         self.aukera = tk.StringVar()
         self.aukera.set(value=" ")
-        con = sqlite3.connect("datubasea.db")
-        cur = con.cursor()
+
 
         # taularen goiko aldea
         self.t1 = tk.Label(self.window, text="Erabiltzailea", bg='CadetBlue1', font=("Times", 12, "bold"))
@@ -49,8 +50,7 @@ class jokalariakKudeatu(object):
         self.t6.place(x=750, y=70)
 
         # botoia
-        cur.execute("SELECT erabiltzailea FROM Erabiltzaileak")
-        res = cur.fetchall()
+        res = Konexioa.getErabiltzailea(Konexioa())
         i = 100
         for row in res:
             self.botoia = tk.Radiobutton(self.window, variable=self.aukera, value=row, bg='CadetBlue1',font=("Times", 12))
@@ -61,8 +61,8 @@ class jokalariakKudeatu(object):
 
 
         #erabiltzailea
-        cur.execute("SELECT erabiltzailea FROM Erabiltzaileak")
-        res = cur.fetchall()
+
+        res = Konexioa.getErabiltzailea(Konexioa())
         i = 100
         for row in res:
             #self.l=tk.Label(self.window,text=row)
@@ -74,8 +74,7 @@ class jokalariakKudeatu(object):
 
 
         #izena
-        cur.execute("SELECT izenAbizenak FROM Erabiltzaileak")
-        res = cur.fetchall()
+        res = Konexioa.getIzena(Konexioa())
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -83,8 +82,7 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # email
-        cur.execute("SELECT helbideElektronikoa FROM Erabiltzaileak")
-        res = cur.fetchall()
+        res = Konexioa.getEmail(Konexioa())
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -92,8 +90,7 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # pasahitza
-        cur.execute("SELECT pasahitza FROM Erabiltzaileak")
-        res = cur.fetchall()
+        res = Konexioa.getPasahitza(Konexioa())
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -101,8 +98,7 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # galko galdera
-        cur.execute("SELECT gakoGaldera FROM Erabiltzaileak")
-        res = cur.fetchall()
+        res = Konexioa.getGakoGaldera(Konexioa())
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -110,8 +106,7 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # gakoa
-        cur.execute("SELECT gakoa FROM Erabiltzaileak")
-        res = cur.fetchall()
+        res = Konexioa.getGako(Konexioa())
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -130,23 +125,16 @@ class jokalariakKudeatu(object):
 
     def ezabatu(self):
         erab = self.aukera.get()
-        con = sqlite3.connect("datubasea.db")
-        cur = con.cursor()
-        res = cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?)",(erab,))
-        ezDago = res.fetchone() is None
-        if(ezDago):
-            print(-1)
+        res=Konexioa.erabiltzaileaKonprobatu(Konexioa(),erab)
+        if(res is None):
+            print("Erabiltzailea ez dago datu basean")
         else:
-            cur.execute("DELETE FROM Erabiltzaileak WHERE erabiltzailea=(?)",(erab,))
-            con.commit()
+            Konexioa.ezabatuErabiltzailea(Konexioa(),erab)
             self.window.destroy()
             jokalariakKudeatu().__init__()
-        #self.window.destroy()
-        #ezabatuErabiltzaile()
 
-    #def hartuJokalariak(self):
 
 
     def atzera(self):
         self.window.destroy()
-        view.erabiltzaileLeihoa.erabiltzaileLeihoa()
+        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea)

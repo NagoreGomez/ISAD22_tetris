@@ -64,7 +64,7 @@ class saioaHasi(object):
             pasahitza2=Konexioa.erabiltzailearenPasahitza(Konexioa(),self.erabiltzailea)
 
 
-            if pasahitza is None: #erabiltzailea ez dago dban
+            if pasahitza2 is None: #erabiltzailea ez dago dban
                 tk.Label(self.window, text='Erabiltzailea ez da egokia, saiatu berriz mesedez.', pady=10,
                          padx=90, bg='CadetBlue1',
                          font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)

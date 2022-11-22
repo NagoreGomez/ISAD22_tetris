@@ -3,6 +3,7 @@ from tkinter import *
 import tkinter as tk
 import view
 import sqlite3
+from controller.konexioa import Konexioa
 
 
 
@@ -75,25 +76,21 @@ class pasahitzaBerreskuratu(object):
         gakoGaldera=self.gakoGalderaE.get()
         pasahitzaBerria=self.pasahitzaBerriaE.get()
 
-        con = sqlite3.connect("datubasea.db")  # konexioa ezarri
-        cur = con.cursor()
 
-        if ((len(erabiltzailea)!=0) &(len(gakoa)!=0 )&(len(pasahitzaBerria)!=0 )):
+        if ((len(erabiltzailea)!=0) &(len(gakoa)!=0 )&(len(pasahitzaBerria)!=0 ) &(len(gakoGaldera)!=0 )):
             #begiratu erabiltzaile eta pasahitz egokia sortu dituen
-            res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND gakoa=(?) AND gakoGaldera=(?)", (erabiltzailea,gakoa,gakoGaldera))
+            dago=Konexioa.gakoakKonprobatu(Konexioa(),erabiltzailea,gakoGaldera,gakoa)
 
-            ezDago = res.fetchone() is None
-            if (ezDago):
-                tk.Label(self.window, text='Sartutako informazioa ez da egokia, saiatu berriz mesedez.', pady=10,
-                         padx=90, bg='CadetBlue1',
-                         font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
-            else:
+            if (dago):
                 # update
-                cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)", (pasahitzaBerria,erabiltzailea))
-                con.commit()
+                Konexioa.pasahitzaAldatu(Konexioa(),erabiltzailea,pasahitzaBerria)
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
 
+            else:
+                tk.Label(self.window, text='Sartutako informazioa ez da egokia, saiatu berriz mesedez.', pady=10,
+                         padx=90, bg='CadetBlue1',
+                         font=("Times", 14, "bold")).place(relx=.5, rely=.7, anchor=CENTER)
 
         else:
             tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)

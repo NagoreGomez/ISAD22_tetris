@@ -14,7 +14,7 @@ class Konexioa(object):
         res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea='admin'")
 
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','CadetBlue1','CadetBlue1','a', '0', '#')")
+            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','#98F5FF','CadetBlue1','a', '0', '#')")
             self.con.commit()
 
     def erabiltzailearenPasahitza (self,erabiltzailea):
@@ -79,3 +79,60 @@ class Konexioa(object):
                                (erabiltzailea,))
         puntuak = res.fetchone()
         return puntuak[0]
+
+    def erabiltzaileaEtaPasahitzaKonprobatu(self,erabiltzailea,pasahitza):
+        res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND pasahitza=(?)", (erabiltzailea,pasahitza))
+        erab = res.fetchone()
+        if erab is None:
+            return erab
+        else:
+            return erab[0]
+
+    def pasahitzaAldatu(self,erabiltzailea,pasahitza):
+        self.cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)",(pasahitza, erabiltzailea))
+        self.con.commit()
+
+
+    def gakoakKonprobatu(self,erabiltzailea,gakoGaldera,gakoa):
+        res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak WHERE erabiltzailea=(?) AND gakoa=(?) AND gakoGaldera=(?)",
+                               (erabiltzailea, gakoa,gakoGaldera))
+        egokia = res.fetchone()
+        if egokia is None:
+            return egokia
+        else:
+            return egokia[0]
+
+
+    def getErabiltzailea(self):
+        res = self.cur.execute("SELECT erabiltzailea FROM Erabiltzaileak")
+        ema = res.fetchall()
+        return ema
+
+    def getIzena(self):
+        res = self.cur.execute("SELECT izenAbizenak FROM Erabiltzaileak")
+        ema = res.fetchall()
+        return ema
+
+    def getEmail(self):
+        res = self.cur.execute("SELECT helbideElektronikoa FROM Erabiltzaileak")
+        ema = res.fetchall()
+        return ema
+
+    def getPasahitza(self):
+        res = self.cur.execute("SELECT pasahitza FROM Erabiltzaileak")
+        ema = res.fetchall()
+        return ema
+
+    def getGakoGaldera(self):
+        res = self.cur.execute("SELECT gakoGaldera FROM Erabiltzaileak")
+        ema = res.fetchall()
+        return ema
+
+    def getGako(self):
+        res = self.cur.execute("SELECT gakoa FROM Erabiltzaileak")
+        ema = res.fetchall()
+        return ema
+
+    def ezabatuErabiltzailea(self,erabiltzailea):
+        self.cur.execute("DELETE FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        self.con.commit()

@@ -4,6 +4,7 @@ from view.abiadurak import abiadurak
 import view
 from view.pertsonalizatu import pertsonalizatu
 from controller.konexioa import Konexioa
+from view.jokalariakKudeatu import jokalariakKudeatu
 
 class erabiltzaileLeihoa(object):
 
@@ -22,6 +23,16 @@ class erabiltzaileLeihoa(object):
         button.pack(pady=10)
         button3 = tk.Button(self.window, text="Partida pertsonalizatu", padx=40, pady=5, command=self.pertsonalizazioa)
         button3.pack(pady=10)
+
+
+
+        erab=Konexioa.erabiltzaileaKonprobatu(Konexioa(),erabiltzailea)
+        if (erab=='admin'):
+            button1 = tk.Button(self.window, text="Jokalariak kudeatu", padx=40, pady=5, command=self.administratu)
+            button1.pack(pady=10)
+
+
+
 
 
         self.partida=Konexioa.partidaKargatu(Konexioa(), self.erabiltzailea)
@@ -43,6 +54,9 @@ class erabiltzaileLeihoa(object):
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)
         self.window.mainloop()
 
+    def administratu(self):
+        self.window.destroy()
+        view.jokalariakKudeatu.jokalariakKudeatu(self.erabiltzailea).__init__()
     def jokatu(self):
         self.window.destroy()
         view.abiadurak.abiadurak(self.erabiltzailea).__init__()

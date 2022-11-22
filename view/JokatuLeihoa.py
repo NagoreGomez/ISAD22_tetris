@@ -2,10 +2,12 @@ import random
 import sys
 import tkinter as tk
 
+import model.Piezak
 import view.ongietorrileioa
 from model.Tableroa import Tableroa
 from model.Piezak import *
 from controller.konexioa import Konexioa
+
 
 
 abiadura=0
@@ -39,8 +41,12 @@ class JokatuLeihoa(object):
 		#Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma
 		adreiluak = Konexioa.getAdreiluak(Konexioa(), self.erabiltzailea)
 		print(adreiluak)
+		print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 		if(adreiluak==1):
-			self.laukiKol='blue'
+			print("222222222222222222")
+
+			print("11111111111111111111111111111111")
+
 			zutabeKol= 'blue'
 			lForma= 'blue'
 			lFormaAlderantzizkoKol= 'blue'
@@ -54,6 +60,11 @@ class JokatuLeihoa(object):
 
 
 		#soinua
+
+
+
+
+
 
 
 
@@ -83,7 +94,7 @@ class JokatuLeihoa(object):
 		print(abiadura)
 		print("aaaaaaaaaaaaaaaaaaaaaaaaaa")
 
-		self.canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa, tamaina=(tamainax,tamainay), partida=partida)
+		self.canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa, tamaina=(tamainax,tamainay), partida=partida,erabiltzailea=self.erabiltzailea)
 
 		button.configure(command=self.canvas.jolastu)
 		self.canvas.pack()
@@ -120,13 +131,14 @@ class JokatuLeihoa(object):
 
 class TableroaPanela(tk.Frame):
 	# EL TAMAINA DEL DEF NO EZARRITUA
-	def __init__(self, tamaina=(tamainax,tamainay), gelazka_tamaina=20,puntuazioalabel=None, master=None, partida=None):
+	def __init__(self, tamaina=(tamainax,tamainay), gelazka_tamaina=20,puntuazioalabel=None, master=None, partida=None,erabiltzailea=None):
 		tk.Frame.__init__(self, master)
 		tamaina = (tamainax,tamainay)
 		self.puntuazio_panela = puntuazioalabel
 		self.tamaina = tamaina
 		self.gelazka_tamaina = gelazka_tamaina
 		self.partida=partida
+		self.erabiltzailea=erabiltzailea
 
 
 
@@ -155,7 +167,6 @@ class TableroaPanela(tk.Frame):
 		for i in range(self.tab.tamaina[1]):
 			for j in range(self.tab.tamaina[0]):
 				if self.tab.tab[i][j]:
-					print(self.tab.tab[i][j])
 					self.marratu_gelazka(j,i,self.tab.tab[i][j])
 		if self.tab.pieza:
 			for i in range(4):
@@ -173,7 +184,8 @@ class TableroaPanela(tk.Frame):
 		except Exception as error:
 			try:
 				self.tab.pieza_finkotu(self.tab.posizioa)
-				pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
+				pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma,
+								   ZformaAlderantzizko, Tforma]
 				self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 			except Exception as e:
 				print("GAMEOVER")
@@ -211,6 +223,11 @@ class TableroaPanela(tk.Frame):
 			self.tab.kargatu_partida(self.partida)
 		else:
 			self.tab.hasieratu_tableroa()
+
+		#adreiluen koloreak ezarri
+
+		#print(self.erabiltzailea)
+
 		pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
