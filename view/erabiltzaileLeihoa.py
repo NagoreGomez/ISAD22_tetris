@@ -1,5 +1,8 @@
 import sys
 import tkinter as tk
+
+import pygame
+
 from view.abiadurak import abiadurak
 import view
 from view.pertsonalizatu import pertsonalizatu
@@ -15,6 +18,7 @@ class erabiltzaileLeihoa(object):
         self.window.title(" Menua")
         self.window.geometry('600x400')
         self.window['bg'] = 'CadetBlue1'
+
 
         self.Erregistroa = tk.Label(self.window, text="ERABILTZAILEAREN ORRIA", bg='CadetBlue1', font=("Times", 14, "bold"))
         self.Erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)

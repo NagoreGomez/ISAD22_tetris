@@ -18,6 +18,7 @@ class saioaHasi(object):
 
 
 
+
         Erregistroa = tk.Label(self.window, text="SAIOA HASTEKO ORRIA", bg='CadetBlue1', font=("Times", 14, "bold"))
         Erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)
 

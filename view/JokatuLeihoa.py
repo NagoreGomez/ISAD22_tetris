@@ -7,6 +7,8 @@ import view.ongietorrileioa
 from model.Tableroa import Tableroa
 from model.Piezak import *
 from controller.konexioa import Konexioa
+from playsound import playsound
+import pygame
 
 
 
@@ -59,12 +61,9 @@ class JokatuLeihoa(object):
 			laukiKol = 'blue'
 
 
-		#soinua
 
-
-
-
-
+		# soinua
+		self.soinua=Konexioa.getSoinuak(Konexioa(),self.erabiltzailea)
 
 
 
@@ -83,6 +82,7 @@ class JokatuLeihoa(object):
 		button.pack()
 
 
+
 		puntuazioa = tk.StringVar()
 		puntuazioa.set(f"Puntuazioa: {puntuak}")
 
@@ -94,7 +94,7 @@ class JokatuLeihoa(object):
 		print(abiadura)
 		print("aaaaaaaaaaaaaaaaaaaaaaaaaa")
 
-		self.canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa, tamaina=(tamainax,tamainay), partida=partida,erabiltzailea=self.erabiltzailea)
+		self.canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa, tamaina=(tamainax,tamainay), partida=partida,erabiltzailea=self.erabiltzailea,soinua=self.soinua)
 
 		button.configure(command=self.canvas.jolastu)
 		self.canvas.pack()
@@ -114,6 +114,7 @@ class JokatuLeihoa(object):
 		self.window.mainloop()
 
 	def partidaGorde (self):
+
 		self.canvas.after_cancel(self.canvas.jokatzen)
 		matrizea = self.canvas.tab
 		gorde = str(matrizea.puntuazioa) + "#" + str(tamainax) + "#" + str(tamainay) + "#" + str(self.abiadura) + "#"
@@ -125,13 +126,15 @@ class JokatuLeihoa(object):
 				else:
 					gorde = gorde + matrizea.tab[i][j] + "#"
 		Konexioa.partidaGorde(Konexioa(), self.erabiltzailea, gorde, self.canvas.tab.puntuazioa)
+		pygame.quit()
 		self.window.destroy()
-
 		view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
 
+	def pause_soundobject(self, soundobj):
+		soundobj.stop()
 class TableroaPanela(tk.Frame):
 	# EL TAMAINA DEL DEF NO EZARRITUA
-	def __init__(self, tamaina=(tamainax,tamainay), gelazka_tamaina=20,puntuazioalabel=None, master=None, partida=None,erabiltzailea=None):
+	def __init__(self, tamaina=(tamainax,tamainay), gelazka_tamaina=20,puntuazioalabel=None, master=None, partida=None,erabiltzailea=None,soinua=None):
 		tk.Frame.__init__(self, master)
 		tamaina = (tamainax,tamainay)
 		self.puntuazio_panela = puntuazioalabel
@@ -139,6 +142,7 @@ class TableroaPanela(tk.Frame):
 		self.gelazka_tamaina = gelazka_tamaina
 		self.partida=partida
 		self.erabiltzailea=erabiltzailea
+		self.soinua=soinua
 
 
 
@@ -217,6 +221,15 @@ class TableroaPanela(tk.Frame):
 			self.marraztu_tableroa()
 
 	def jolastu(self):
+		# soinua
+		pygame.quit()  # musika badago, musika kendu
+		pygame.init()  # musika jarri ahal izateko
+		pygame.mixer.init()
+		soinua = pygame.mixer.Sound("soinuak/" + self.soinua + ".wav")
+		pygame.mixer.Sound.play(soinua, -1)
+
+
+
 		if self.jokatzen:
 			self.after_cancel(self.jokatzen)
 		if self.partida is not None:
@@ -228,8 +241,12 @@ class TableroaPanela(tk.Frame):
 
 		#print(self.erabiltzailea)
 
+		#si pones aqui Luakia(kolorea=self.erabiltzailea te salta exception)
+
 		pieza_posibleak = [Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma]
 		self.tab.sartu_pieza(random.choice(pieza_posibleak)())
 		self.marraztu_tableroa()
 		self.jokatzen = self.after(abiadura, self.pausu_bat)
+
+		#playsound('soinuak/soinua1.mp3')
 

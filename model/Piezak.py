@@ -43,9 +43,18 @@ class Pieza:
 
 class Laukia(Pieza):
 	def __init__(self, kolorea=None):
-		super(Laukia, self).__init__([[0,0],[0,1],[1,0],[1,1]], kolorea='yellow')
-
-
+		#global adreiluKolorea
+		#adreiluKolorea='yellow'
+		#print("kjkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+		#print(kolorea)
+		#self.erabiltzailea=kolorea #en kolorea pasas el parametro para hacer la kontsulta
+		#koloreZenb=Konexioa.getAdreiluak(Konexioa(),self.erabiltzailea)
+		#print(koloreZenb)
+		#if(koloreZenb==1):
+		#	print("ahssssssssssssssssssssssssssssssssssssssss")
+			#adreiluKolorea='#98F5FF'
+		#print("kjkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+		super(Laukia, self).__init__([[0, 0], [0, 1], [1, 0], [1, 1]], kolorea='yellow')
 
 
 class Zutabea(Pieza):

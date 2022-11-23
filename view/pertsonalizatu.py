@@ -100,11 +100,11 @@ class pertsonalizatu(object):
 
         self.soinua = "a"
         if (self.aukeraSoinu.get() == 1):
-            self.soinua = "1"
+            self.soinua = "soinua1"
         elif (self.aukeraSoinu.get() == 2):
-            self.soinua = "2"
+            self.soinua = "soinua2"
         elif (self.aukeraSoinu.get() == 3):
-            self.soinua = "3"
+            self.soinua = "soinua3"
 
         print( self.fondoa)
         print(self.adreiluak)

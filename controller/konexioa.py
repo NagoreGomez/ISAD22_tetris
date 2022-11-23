@@ -14,7 +14,7 @@ class Konexioa(object):
         res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea='admin'")
 
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','#98F5FF','CadetBlue1','a', '0', '#')")
+            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','#98F5FF','CadetBlue1','soinua1', '0', '#')")
             self.con.commit()
 
     def erabiltzailearenPasahitza (self,erabiltzailea):
@@ -62,6 +62,10 @@ class Konexioa(object):
         adreiluak = res.fetchone()
         return adreiluak[0]
 
+    def getSoinuak(self,erabiltzailea):
+        res=self.cur.execute("SELECT soinua FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        soinua = res.fetchone()
+        return soinua[0]
 
     def partidaGorde(self,erabiltzailea, partida, puntuak):
         self.cur.execute("UPDATE Erabiltzaileak SET partida=(?), puntuak=(?) WHERE erabiltzailea=(?)",
