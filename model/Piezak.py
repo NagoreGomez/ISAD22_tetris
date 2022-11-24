@@ -1,4 +1,5 @@
 from controller.konexioa import Konexioa
+erabiltzailea=""
 
 class Pieza:
 	def __init__(self, forma, kolorea):
@@ -43,43 +44,89 @@ class Pieza:
 
 class Laukia(Pieza):
 	def __init__(self, kolorea=None):
-		#global adreiluKolorea
-		#adreiluKolorea='yellow'
-		#print("kjkkkkkkkkkkkkkkkkkkkkkkkkkkk")
-		#print(kolorea)
-		#self.erabiltzailea=kolorea #en kolorea pasas el parametro para hacer la kontsulta
-		#koloreZenb=Konexioa.getAdreiluak(Konexioa(),self.erabiltzailea)
-		#print(koloreZenb)
-		#if(koloreZenb==1):
-		#	print("ahssssssssssssssssssssssssssssssssssssssss")
-			#adreiluKolorea='#98F5FF'
-		#print("kjkkkkkkkkkkkkkkkkkkkkkkkkkkk")
-		super(Laukia, self).__init__([[0, 0], [0, 1], [1, 0], [1, 1]], kolorea='yellow')
+		koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+
+		if(koloreKodea=='1'):
+			kolorea2='#ADFF2F'
+		elif(koloreKodea=='2'):
+			kolorea2='#4169E1'
+		else:
+			kolorea2 = 'yellow'
+		super(Laukia, self).__init__([[0, 0], [0, 1], [1, 0], [1, 1]], kolorea=kolorea2)
 
 
 class Zutabea(Pieza):
 	def __init__(self, kolorea=None):
-		super(Zutabea, self).__init__([[0,-1],[0,0],[0,1],[0,2]], kolorea='cyan')
+		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
+
+		if (koloreKodea == '1'):
+			kolorea2 = '#F5DEB3'
+		elif (koloreKodea == '2'):
+			kolorea2 = '#9B30FF'
+		else:
+			kolorea2 = 'cyan'
+		super(Zutabea, self).__init__([[0,-1],[0,0],[0,1],[0,2]], kolorea=kolorea2)
 
 
 
 class Lforma(Pieza):
 	def __init__(self, kolorea=None):
-		super(Lforma, self).__init__([[-1,-1],[0,-1],[0,0],[0,1]], kolorea='blue')
+		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
+
+		if (koloreKodea == '1'):
+			kolorea2 = '#FF8000'
+		elif (koloreKodea == '2'):
+			kolorea2 = '#87CEEB'
+		else:
+			kolorea2 = 'blue'
+		super(Lforma, self).__init__([[-1,-1],[0,-1],[0,0],[0,1]], kolorea=kolorea2)
 
 class LformaAlderantzizko(Pieza):
+
 	def __init__(self, kolorea=None):
-		super(LformaAlderantzizko, self).__init__([[1,-1],[0,-1],[0,0],[0,1]], kolorea='orange')
+		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
+
+		if (koloreKodea == '1'):
+			kolorea2 = '#FF4500'
+		elif (koloreKodea == '2'):
+			kolorea2 = '#40E0D0'
+		else:
+			kolorea2 = 'orange'
+		super(LformaAlderantzizko, self).__init__([[1,-1],[0,-1],[0,0],[0,1]], kolorea=kolorea2)
 
 
 class Zforma(Pieza):
 	def __init__(self, kolorea=None):
-		super(Zforma, self).__init__([[0,-1],[0,0],[-1,0],[-1,1]], kolorea='green')
+		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
+
+		if (koloreKodea == '1'):
+			kolorea2 = '#DA70D6'
+		elif (koloreKodea == '2'):
+			kolorea2 = '#872657'
+		else:
+			kolorea2 = 'green'
+		super(Zforma, self).__init__([[0,-1],[0,0],[-1,0],[-1,1]], kolorea=kolorea2)
 
 class ZformaAlderantzizko(Pieza):
 	def __init__(self, kolorea=None):
-		super(ZformaAlderantzizko, self).__init__([[0,-1],[0,0],[1,0],[1,1]], kolorea='red')
+		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
+
+		if (koloreKodea == '1'):
+			kolorea2 = '#FFC0CB'
+		elif (koloreKodea == '2'):
+			kolorea2 = '#00008B'
+		else:
+			kolorea2 = 'red'
+		super(ZformaAlderantzizko, self).__init__([[0,-1],[0,0],[1,0],[1,1]], kolorea=kolorea2)
 
 class Tforma(Pieza):
 	def __init__(self, kolorea=None):
-		super(Tforma, self).__init__([[-1,0],[0,0],[1,0],[0,1]], kolorea='purple')
+		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
+
+		if (koloreKodea == '1'):
+			kolorea2 = '#8B3626'
+		elif (koloreKodea == '2'):
+			kolorea2 = '#006400'
+		else:
+			kolorea2 = 'purple'
+		super(Tforma, self).__init__([[-1,0],[0,0],[1,0],[0,1]], kolorea=kolorea2)

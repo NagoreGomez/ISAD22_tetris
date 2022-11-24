@@ -14,7 +14,7 @@ class Konexioa(object):
         res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea='admin'")
 
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','#98F5FF','CadetBlue1','soinua1', '0', '#')")
+            self.cur.execute("INSERT INTO Erabiltzaileak VALUES ('admin','admin','admin@gmail.com','123','admin?','bai','#98F5FF','1','soinua1', '0', '#')")
             self.con.commit()
 
     def erabiltzailearenPasahitza (self,erabiltzailea):

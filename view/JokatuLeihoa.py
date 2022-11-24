@@ -2,7 +2,7 @@ import random
 import sys
 import tkinter as tk
 
-import model.Piezak
+import model.Piezak as piezak
 import view.ongietorrileioa
 from model.Tableroa import Tableroa
 from model.Piezak import *
@@ -10,7 +10,7 @@ from controller.konexioa import Konexioa
 from playsound import playsound
 import pygame
 
-
+erabiltzailea=""
 
 abiadura=0
 tamainax=0
@@ -24,6 +24,7 @@ class JokatuLeihoa(object):
 
 
 
+
 		self.window = tk.Tk()
 		self.window.geometry('600x700') #LEHIOAREN TAMAINA
 		self.window.title("Tetris jokoa")
@@ -32,6 +33,7 @@ class JokatuLeihoa(object):
 		global erabiltzailea
 		erabiltzailea=self.erabiltzailea
 
+		piezak.erabiltzailea = erabiltzailea
 
 		#koloreaLortu
 		fondoa=Konexioa.getAtzekoKolorea(Konexioa(), self.erabiltzailea)
@@ -42,23 +44,6 @@ class JokatuLeihoa(object):
 		#adreilu koloreak
 		#Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma
 		adreiluak = Konexioa.getAdreiluak(Konexioa(), self.erabiltzailea)
-		print(adreiluak)
-		print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-		if(adreiluak==1):
-			print("222222222222222222")
-
-			print("11111111111111111111111111111111")
-
-			zutabeKol= 'blue'
-			lForma= 'blue'
-			lFormaAlderantzizkoKol= 'blue'
-			zFormaKol= 'blue'
-			zFormaAlderantzizkoKol= 'blue'
-			tFormaKol='blue'
-		elif(adreiluak==2):
-			laukiKol = 'blue'
-		else:
-			laukiKol = 'blue'
 
 
 
