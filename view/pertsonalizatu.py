@@ -115,7 +115,6 @@ class pertsonalizatu(object):
 
         #volver al menu
         self.window.destroy()
-        # if(self.erabiltzailea is not None):
         view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
 
 
