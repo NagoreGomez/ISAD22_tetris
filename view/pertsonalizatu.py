@@ -57,13 +57,13 @@ class pertsonalizatu(object):
         self.soinua = tk.Label(self.window, text="Soinua:", bg='CadetBlue1', font=("Times", 12,"bold"))
         self.soinua.place(x=100, y=230)
 
-        self.atzekoKolorea1 = tk.Radiobutton(self.window,variable=self.aukeraSoinu, text="A", value=1, bg='CadetBlue1', font=("Times", 12))
+        self.atzekoKolorea1 = tk.Radiobutton(self.window,variable=self.aukeraSoinu, text="Klasikoa", value=1, bg='CadetBlue1', font=("Times", 12))
         self.atzekoKolorea1.place(x=100, y=260)
 
-        self.atzekoKolorea2 = tk.Radiobutton(self.window,variable=self.aukeraSoinu, text="B", value=2, bg='CadetBlue1', font=("Times", 12))
+        self.atzekoKolorea2 = tk.Radiobutton(self.window,variable=self.aukeraSoinu, text="Guitarra", value=2, bg='CadetBlue1', font=("Times", 12))
         self.atzekoKolorea2.place(x=200, y=260)
 
-        self.atzekoKolorea3 = tk.Radiobutton(self.window,variable=self.aukeraSoinu, text="C", value=3, bg='CadetBlue1', font=("Times", 12))
+        self.atzekoKolorea3 = tk.Radiobutton(self.window,variable=self.aukeraSoinu, text="Chundachunda", value=3, bg='CadetBlue1', font=("Times", 12))
         self.atzekoKolorea3.place(x=300, y=260)
 
         button2 = tk.Button(self.window, text="Pertsonalizazioa gorde", padx=30, pady=5, command=self.pertsonalizazioa)
