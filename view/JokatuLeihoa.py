@@ -74,10 +74,8 @@ class JokatuLeihoa(object):
 		puntuazioalabel = tk.Label(self.window, textvariable=puntuazioa, bg=fondoa)
 		puntuazioalabel.pack()
 
-		print(tamainax)
-		print(tamainay)
-		print(abiadura)
-		print("aaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+
 
 		self.canvas = TableroaPanela(master=self.window, puntuazioalabel = puntuazioa, tamaina=(tamainax,tamainay), partida=partida,erabiltzailea=self.erabiltzailea,soinua=self.soinua)
 
@@ -87,6 +85,10 @@ class JokatuLeihoa(object):
 		#botonnnnnnnnnnnnnnnnnnnnnnnn
 		if self.erabiltzailea is not None:
 			button2 = tk.Button(self.window, text="Partida gorde", command=self.partidaGorde)
+			button2.pack()
+
+		if self.erabiltzailea is not None:
+			button2 = tk.Button(self.window, text="Itzuli", command=self.itzuli)
 			button2.pack()
 
 		self.window.bind("<Up>", self.canvas.joku_kontrola)
@@ -115,6 +117,11 @@ class JokatuLeihoa(object):
 		self.window.destroy()
 		view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
 
+	def itzuli(self):
+		pygame.quit()
+		self.window.destroy()
+		view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
+
 	def pause_soundobject(self, soundobj):
 		soundobj.stop()
 class TableroaPanela(tk.Frame):
@@ -137,7 +144,6 @@ class TableroaPanela(tk.Frame):
 			bg='#eee', borderwidth=0, highlightthickness=0
 		)
 		self.canvas.pack(expand=tk.YES, fill=None)
-		#print(tamaina)
 		self.tab = Tableroa(tamaina)
 		self.jokatzen = None
 		self.tableroa_ezabatu()
@@ -224,7 +230,7 @@ class TableroaPanela(tk.Frame):
 
 		#adreiluen koloreak ezarri
 
-		#print(self.erabiltzailea)
+
 
 		#si pones aqui Luakia(kolorea=self.erabiltzailea te salta exception)
 
