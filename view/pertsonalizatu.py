@@ -77,7 +77,7 @@ class pertsonalizatu(object):
 
     def itzuli(self):
         self.window.destroy()
-        view.erabiltzaileLeihoa.erabiltzaileLeihoa()
+        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
 
     def pertsonalizazioa(self):
 
@@ -106,9 +106,6 @@ class pertsonalizatu(object):
         elif (self.aukeraSoinu.get() == 3):
             self.soinua = "soinua3"
 
-        print( self.fondoa)
-        print(self.adreiluak)
-        print(self.soinua)
 
         #guardar en la db
         Konexioa.pertsonalizazioaGorde(Konexioa(), self.fondoa,self.adreiluak,self.soinua,self.erabiltzailea)
