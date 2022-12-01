@@ -3,11 +3,13 @@ import tkinter as tk
 
 import pygame
 
+
 from view.abiadurak import abiadurak
 import view
 from view.pertsonalizatu import pertsonalizatu
 from controller.konexioa import Konexioa
 from view.jokalariakKudeatu import jokalariakKudeatu
+from view.RankingHautatu import RankigHautatu
 
 class erabiltzaileLeihoa(object):
 
@@ -50,6 +52,8 @@ class erabiltzaileLeihoa(object):
             button4 = tk.Button(self.window, text="Gordetako partida berreskuratu", padx=40, pady=5, state="disabled")
             button4.pack(pady=10)
 
+        button = tk.Button(self.window, text="Ranking-ak ikusi", padx=40, pady=5, command=self.rankingaikusi)
+        button.pack(pady=10)
 
         button2 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.itzuli)
         button2.pack(pady=10)
@@ -61,10 +65,14 @@ class erabiltzaileLeihoa(object):
     def administratu(self):
         self.window.destroy()
         view.jokalariakKudeatu.jokalariakKudeatu(self.erabiltzailea).__init__()
+    def rankingaikusi(self):
+        self.window.destroy()
+        view.RankingHautatu.RankigHautatu(self.erabiltzailea).__init__()
+
+
     def jokatu(self):
         self.window.destroy()
         view.abiadurak.abiadurak(self.erabiltzailea).__init__()
-
 
     def pertsonalizazioa(self):
         self.window.destroy()
