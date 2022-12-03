@@ -82,7 +82,7 @@ class erregistratu(object):
             erab2 = Konexioa.erabiltzaileaKonprobatu(Konexioa(), erabiltzailea)
 
             #default balioak   PROBARRR
-            fondoa='98F5FF'
+            fondoa='#98F5FF'
             adreiluak='1'
             soinua='soinua1'
             puntuak=0

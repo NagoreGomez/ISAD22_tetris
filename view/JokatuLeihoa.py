@@ -172,6 +172,7 @@ class TableroaPanela(tk.Frame):
 
 
 	def pausu_bat(self):
+
 		self.erabiltzailea=erabiltzailea
 		try:
 			self.tab.betetako_lerroak_ezabatu()
@@ -188,7 +189,38 @@ class TableroaPanela(tk.Frame):
 				self.itzuliBotoia = tk.Button(self.window, text="Itzuli", command=self.itzuli)
 				self.itzuliBotoia.place(x=530,y=30)
 
+				global tamainaKodea
+				global abiaduraKodea
+				#RANKING-ERAKO
+				if (abiadura==800):
+					abiaduraKodea='1'
+				if (abiadura==400):
+					abiaduraKodea='2'
+				if (abiadura == 100):
+					abiaduraKodea = '3'
 
+				if (tamainax==10):
+					tamainaKodea='1'
+				if (tamainax==15):
+					abiaduraKodea='2'
+				if (tamainax == 20):
+					abiaduraKodea = '3'
+
+
+				partidakoPuntuak=self.puntuazio_panela.get().split()[1]
+				partidakoPuntuak = str(partidakoPuntuak)
+				partidakoPuntuak=int(partidakoPuntuak)
+
+
+				erabiltzailePuntuak=Konexioa.getPuntuak(Konexioa(),erabiltzailea=self.erabiltzailea,tamaina=tamainaKodea,abiadura=abiaduraKodea)
+				#erabiltzailePuntuak = str(erabiltzailePuntuak)
+				#erabiltzailePuntuak=int(erabiltzailePuntuak)
+
+				if(erabiltzailePuntuak<partidakoPuntuak):
+					Konexioa.puntuakEguneratu(Konexioa(),self.erabiltzailea, tamainaKodea, abiaduraKodea,partidakoPuntuak)
+
+
+				#BERRIZ HASIERATU
 				self.tab.hasieratu_tableroa()
 
 
