@@ -40,7 +40,7 @@ class Konexioa(object):
             "CREATE TABLE IF NOT EXISTS Sariak(abiadura,tamaina,puntuKop,partidaKop)")
 
         res = self.cur.execute("SELECT * FROM Sariak")
-
+        self.cur.execute("DELETE FROM Sariak")
         if res.fetchone() is None:
             self.cur.execute("INSERT INTO Sariak VALUES ('1','1','5000','2')")
             self.cur.execute("INSERT INTO Sariak VALUES ('1','1','5000','4')")
