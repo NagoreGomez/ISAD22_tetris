@@ -75,6 +75,7 @@ class Tableroa:
 			self.posizioa = posizio_berria
 		else:
 			raise Exception("Pieza ezin da horra mugitu")
+			print("GAMEOVER")
 
 	def mugitu_ezkerrera(self):
 		if not self.pieza:

@@ -202,9 +202,9 @@ class TableroaPanela(tk.Frame):
 				if (tamainax==10):
 					tamainaKodea='1'
 				if (tamainax==15):
-					abiaduraKodea='2'
+					tamainaKodea='2'
 				if (tamainax == 20):
-					abiaduraKodea = '3'
+					tamainaKodea = '3'
 
 
 				partidakoPuntuak=self.puntuazio_panela.get().split()[1]
@@ -218,6 +218,16 @@ class TableroaPanela(tk.Frame):
 
 				if(erabiltzailePuntuak<partidakoPuntuak):
 					Konexioa.puntuakEguneratu(Konexioa(),self.erabiltzailea, tamainaKodea, abiaduraKodea,partidakoPuntuak)
+
+				if(partidakoPuntuak>5000):
+					Konexioa.bostmilaGehitu(Konexioa(),self.erabiltzailea,tamainaKodea,abiaduraKodea)
+				if(partidakoPuntuak > 3000):
+					Konexioa.hirumilaGehitu(Konexioa(), self.erabiltzailea, tamainaKodea, abiaduraKodea)
+				if (partidakoPuntuak > 1000):
+					Konexioa.milaGehitu(Konexioa(), self.erabiltzailea, tamainaKodea, abiaduraKodea)
+
+				partidaKop = Konexioa.getPartidaKop(Konexioa(),self.erabiltzailea,tamainaKodea,abiaduraKodea)
+				puntuKop = Konexioa.getPuntuKop(Konexioa(),self.erabiltzailea,tamainaKodea,abiaduraKodea)
 
 
 				#BERRIZ HASIERATU

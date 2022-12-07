@@ -42,23 +42,26 @@ class Konexioa(object):
         res = self.cur.execute("SELECT * FROM Sariak")
 
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','3000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','5000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','5000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','2','5000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','2','5000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','3','5000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','3','5000','4')")
 
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','2','3000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','3000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','3000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','2','3000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','2','3000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','3','3000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','3','3000','4')")
 
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','3','3000','6')")
-
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','1000','2')")
-
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','2','1000','4')")
-
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','3','1000','6')")
-
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','100','2')")
-
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','2','100','4')")
-
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','3','100','6')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','1000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','1000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','2','1000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','2','1000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','3','1000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','3','1000','4')")
 
             self.con.commit()
 
@@ -200,8 +203,8 @@ class Konexioa(object):
         self.con.commit()
 
     def puntuakEguneratu(self,erabiltzailea,tamaina,abiadura,puntuak):
-        self.cur.execute("UPDATE ErabiltzailePuntuazioa SET puntuKop=(?) WHERE erabiltzailea=(?) AND tamaina=(?) AND abiadura=(?)", (puntuak, erabiltzailea,tamaina,abiadura))
-        self.con.commit()
+       self.cur.execute("UPDATE ErabiltzailePuntuazioa SET puntuKop=(?) WHERE erabiltzailea=(?) AND tamaina=(?) AND abiadura=(?)", (puntuak, erabiltzailea,tamaina,abiadura))
+       self.con.commit()
 
     def getPuntuak(self,erabiltzailea,tamaina,abiadura):
 
@@ -241,3 +244,20 @@ class Konexioa(object):
                                (tamaina,abiadura))
         ema = res.fetchall()
         return ema
+
+    def bostmilaGehitu(self,erabiltzaile,tamaina,abiadura):
+        res = self.cur.execute("UPDATE ErabiltzailePuntuazioa SET bostmila=bostmila+1 WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))
+        self.con.commit()
+
+    def hirumilaGehitu(self,erabiltzaile,tamaina,abiadura):
+        res = self.cur.execute("UPDATE ErabiltzailePuntuazioa SET hirumila=hirumila+1 WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))
+        self.con.commit()
+
+    def milaGehitu(self,erabiltzaile,tamaina,abiadura):
+        res = self.cur.execute("UPDATE ErabiltzailePuntuazioa SET mila=mila+1 WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))
+        self.con.commit()
+
+    def getPartidaKop(self,erabiltzaile,tamaina,abiadura):
+        self.cur.execute("SELECT partidaKop FROM Sariak WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))
+    def getPuntuKop(self,erabiltaile,tamaina,abiadura):
+        self.cur.execute("SELECT puntuKop FROM Sariak WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))

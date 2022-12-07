@@ -58,6 +58,7 @@ class RankingX(object):
             unekoPos=unekoPos+1
 
 
+
         button3 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.atzera)
         button3.place(x=200, y=i+80)
 
