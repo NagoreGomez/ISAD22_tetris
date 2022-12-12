@@ -18,20 +18,20 @@ class Konexioa(object):
             self.con.commit()
 
         self.cur.execute(
-            "CREATE TABLE IF NOT EXISTS ErabiltzailePuntuazioa(erabiltzailea,abiadura,tamaina,puntuKop)")
+            "CREATE TABLE IF NOT EXISTS ErabiltzailePuntuazioa(erabiltzailea,abiadura,tamaina,puntuMax,unekoPuntuak,partidaKop)")
 
         res = self.cur.execute("SELECT * FROM ErabiltzailePuntuazioa  WHERE erabiltzailea='admin'")
 
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','1','1',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','1','2',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','1','3',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','2','1',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','2','2',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','2','3',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','3','1',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','3','2',0)")
-            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','3','3',0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','1','1',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','1','2',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','1','3',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','2','1',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','2','2',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','2','3',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','3','1',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','3','2',0,0,0)")
+            self.cur.execute("INSERT INTO ErabiltzailePuntuazioa VALUES ('admin','3','3',0,0,0)")
 
 
 
@@ -42,26 +42,26 @@ class Konexioa(object):
         res = self.cur.execute("SELECT * FROM Sariak")
         self.cur.execute("DELETE FROM Sariak")
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','5000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','5000','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','2','5000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','2','5000','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','3','5000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','3','5000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','10','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','10','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','2','1000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','2','1000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','3','1000','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','3','1000','4')")
 
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','3000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','3000','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','2','3000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','2','3000','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','3','3000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','3','3000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','500','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','500','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','2','500','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','2','500','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','3','500','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','3','500','4')")
 
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','1000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','1000','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','2','1000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','2','1000','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','3','1000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','3','1000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','100','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','100','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','2','100','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','2','100','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','3','100','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','3','100','4')")
 
             self.con.commit()
 
@@ -203,12 +203,12 @@ class Konexioa(object):
         self.con.commit()
 
     def puntuakEguneratu(self,erabiltzailea,tamaina,abiadura,puntuak):
-       self.cur.execute("UPDATE ErabiltzailePuntuazioa SET puntuKop=(?) WHERE erabiltzailea=(?) AND tamaina=(?) AND abiadura=(?)", (puntuak, erabiltzailea,tamaina,abiadura))
+       self.cur.execute("UPDATE ErabiltzailePuntuazioa SET puntuMax=(?) WHERE erabiltzailea=(?) AND tamaina=(?) AND abiadura=(?)", (puntuak, erabiltzailea,tamaina,abiadura))
        self.con.commit()
 
     def getPuntuak(self,erabiltzailea,tamaina,abiadura):
 
-        res = self.cur.execute("SELECT puntuKop FROM ErabiltzailePuntuazioa WHERE erabiltzailea=(?) AND tamaina=(?) AND abiadura=(?)",
+        res = self.cur.execute("SELECT puntuMax FROM ErabiltzailePuntuazioa WHERE erabiltzailea=(?) AND tamaina=(?) AND abiadura=(?)",
                                (erabiltzailea,tamaina,abiadura))
         puntuak = res.fetchone()
         return puntuak[0]
@@ -229,32 +229,41 @@ class Konexioa(object):
         return ema
 
     def getpuntuakRanking(self):
-        res = self.cur.execute("SELECT puntuKop FROM ErabiltzailePuntuazioa")
+        res = self.cur.execute("SELECT puntuMax FROM ErabiltzailePuntuazioa")
         ema = res.fetchall()
         return ema
 
 
     def getRankingAbsolutua(self):
-        res = self.cur.execute("SELECT * FROM ErabiltzailePuntuazioa ORDER BY puntuKop DESC")
+        res = self.cur.execute("SELECT * FROM ErabiltzailePuntuazioa ORDER BY puntuMax DESC")
         ema = res.fetchall()
         return ema
 
     def getRankingX(self,tamaina, abiadura):
-        res = self.cur.execute("SELECT erabiltzailea, puntuKop FROM ErabiltzailePuntuazioa WHERE tamaina=(?) AND abiadura=(?) ORDER BY puntuKop DESC ",
+        res = self.cur.execute("UPDATE unekoPuntuak FROM ErabiltzailePuntuazioa WHERE tamaina=(?) AND abiadura=(?) ORDER BY puntuMax DESC ",
                                (tamaina,abiadura))
         ema = res.fetchall()
         return ema
 
-    def bostmilaGehitu(self,erabiltzaile,tamaina,abiadura):
-        res = self.cur.execute("UPDATE ErabiltzailePuntuazioa SET bostmila=bostmila+1 WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))
-        self.con.commit()
 
-    def hirumilaGehitu(self,erabiltzaile,tamaina,abiadura):
-        res = self.cur.execute("UPDATE ErabiltzailePuntuazioa SET hirumila=hirumila+1 WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))
-        self.con.commit()
+    def getMailakoSariPuntuak(self,tamaina,abiadura):
+        res = self.cur.execute(
+            "SELECT puntuKop FROM Sariak WHERE tamaina=(?) AND abiadura=(?)",
+            (tamaina, abiadura))
+        puntuak = res.fetchone()
+        return puntuak[0]
 
-    def milaGehitu(self,erabiltzaile,tamaina,abiadura):
-        res = self.cur.execute("UPDATE ErabiltzailePuntuazioa SET mila=mila+1 WHERE tamaina=(?) AND abiadura=(?)",(tamaina,abiadura))
+    def getMailakoPartidaKop(self,tamaina,abiadura):
+        res = self.cur.execute(
+            "SELECT partidaKop FROM ErabiltzailePuntuazioa WHERE tamaina=(?) AND abiadura=(?)",
+            (tamaina, abiadura))
+        partidaKop = res.fetchone()
+        return partidaKop[0]
+
+    def actualizarPuntos(self,tamaina,abiadura,puntuak,partidaKop,erabiltzailea):
+        self.cur.execute(
+            "UPDATE ErabiltzailePuntuazioa SET unekoPuntuak=(?), partidaKop=(?) WHERE tamaina=(?) AND abiadura=(?) AND erabiltzailea=(?)",
+            (puntuak,partidaKop,tamaina, abiadura,erabiltzailea))
         self.con.commit()
 
     def getPartidaKop(self,erabiltzaile,tamaina,abiadura):

@@ -216,18 +216,37 @@ class TableroaPanela(tk.Frame):
 				#erabiltzailePuntuak = str(erabiltzailePuntuak)
 				#erabiltzailePuntuak=int(erabiltzailePuntuak)
 
+
 				if(erabiltzailePuntuak<partidakoPuntuak):
 					Konexioa.puntuakEguneratu(Konexioa(),self.erabiltzailea, tamainaKodea, abiaduraKodea,partidakoPuntuak)
 
-				if(partidakoPuntuak>5000):
-					Konexioa.bostmilaGehitu(Konexioa(),self.erabiltzailea,tamainaKodea,abiaduraKodea)
-				if(partidakoPuntuak > 3000):
-					Konexioa.hirumilaGehitu(Konexioa(), self.erabiltzailea, tamainaKodea, abiaduraKodea)
-				if (partidakoPuntuak > 1000):
-					Konexioa.milaGehitu(Konexioa(), self.erabiltzailea, tamainaKodea, abiaduraKodea)
+				puntuak= Konexioa.getMailakoSariPuntuak(Konexioa(),tamainaKodea,abiaduraKodea);
+				puntuak=int(puntuak);
 
-				partidaKop = Konexioa.getPartidaKop(Konexioa(),self.erabiltzailea,tamainaKodea,abiaduraKodea)
-				puntuKop = Konexioa.getPuntuKop(Konexioa(),self.erabiltzailea,tamainaKodea,abiaduraKodea)
+				print(puntuak);
+
+				if(partidakoPuntuak>=puntuak):
+
+					partidaKop = Konexioa.getMailakoPartidaKop(Konexioa(), tamainaKodea, abiaduraKodea);
+					print("hola");
+					partidaKop=partidaKop+1;
+					Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,puntuak,partidaKop,erabiltzailea);
+					print(partidaKop);
+
+				else:
+					print("adios");
+					Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,0,0,erabiltzailea); #puntuak a 0 o a lo que esta??
+
+
+				#comprobar si ha ganado algun premio
+				partidaKop = Konexioa.getMailakoPartidaKop(Konexioa(), tamainaKodea, abiaduraKodea);
+				if(partidaKop==4):
+					print("premio 4");
+					#añadir el premio: konexio.setSaria(Konexioa(),tamainaKodea,abiaduraKodea,puntuak,partidaKop,erabiltzailea)
+
+				elif(partidaKop==2):
+					print("premio 2");
+
 
 
 				#BERRIZ HASIERATU
