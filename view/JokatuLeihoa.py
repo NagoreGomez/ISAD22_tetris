@@ -4,6 +4,7 @@ import tkinter as tk
 
 import model.Piezak as piezak
 import view.ongietorrileioa
+import view.saria
 from model.Tableroa import Tableroa
 from model.Piezak import *
 from controller.konexioa import Konexioa
@@ -223,29 +224,30 @@ class TableroaPanela(tk.Frame):
 				puntuak= Konexioa.getMailakoSariPuntuak(Konexioa(),tamainaKodea,abiaduraKodea);
 				puntuak=int(puntuak);
 
+				print("Puntuak");
 				print(puntuak);
 
 				if(partidakoPuntuak>=puntuak):
-
-					partidaKop = Konexioa.getMailakoPartidaKop(Konexioa(), tamainaKodea, abiaduraKodea);
-					print("hola");
+					partidaKop = Konexioa.getErabiltzailearenMailakoPartidaKop(Konexioa(), tamainaKodea, abiaduraKodea,erabiltzailea);
 					partidaKop=partidaKop+1;
 					Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,puntuak,partidaKop,erabiltzailea);
 					print(partidaKop);
 
+					# comprobar si ha ganado algun premio
+					erabiltzailearenPartidaKop = Konexioa.getErabiltzailearenMailakoPartidaKop(Konexioa(), tamainaKodea,
+																							   abiaduraKodea,erabiltzailea);
+					if (erabiltzailearenPartidaKop == 4 or erabiltzailearenPartidaKop == 2):
+						erabiltzailearenPartidaKop=str(erabiltzailearenPartidaKop)
+						id = Konexioa.getSariId(Konexioa(), tamainaKodea, abiaduraKodea, erabiltzailearenPartidaKop);
+						Konexioa.erabiltzaleariSariaEman(Konexioa(), id, erabiltzailea);
+						view.saria.saria(self.erabiltzailea,tamainax,tamainay,abiadura,puntuak, partidaKop).__init__()
+
+
+
 				else:
-					print("adios");
-					Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,0,0,erabiltzailea); #puntuak a 0 o a lo que esta??
+					Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,0,0,erabiltzailea);
 
 
-				#comprobar si ha ganado algun premio
-				partidaKop = Konexioa.getMailakoPartidaKop(Konexioa(), tamainaKodea, abiaduraKodea);
-				if(partidaKop==4):
-					print("premio 4");
-					#añadir el premio: konexio.setSaria(Konexioa(),tamainaKodea,abiaduraKodea,puntuak,partidaKop,erabiltzailea)
-
-				elif(partidaKop==2):
-					print("premio 2");
 
 
 

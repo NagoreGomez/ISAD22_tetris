@@ -45,6 +45,7 @@ class RankingAbsolutua(object):
 
 
         res=Konexioa.getRankingAbsolutua(Konexioa())
+        print(res);
 
         luzera=len(res)
 
