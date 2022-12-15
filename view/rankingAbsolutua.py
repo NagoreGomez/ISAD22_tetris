@@ -17,7 +17,7 @@ class RankingAbsolutua(object):
         self.window = tk.Tk()
         self.erabiltzailea=erabiltzailea
         self.window.title("Ranking")
-        self.window.geometry('1000x600')
+        self.window.geometry('600x400')
         self.window['bg'] = 'CadetBlue1'
 
 
@@ -31,46 +31,56 @@ class RankingAbsolutua(object):
 
 
         # taularen goiko aldea
+        # taularen goiko aldea
+        self.t1 = tk.Label(self.window, text="Posizioa", bg='CadetBlue1', font=("Times", 12, "bold"))
+        self.t1.place(x=5, y=70)
+
         self.t1 = tk.Label(self.window, text="Erabiltzailea", bg='CadetBlue1', font=("Times", 12, "bold"))
-        self.t1.place(x=10, y=70)
+        self.t1.place(x=100, y=70)
 
         self.t2 = tk.Label(self.window, text="Abiadura", bg='CadetBlue1', font=("Times", 12, "bold"))
-        self.t2.place(x=150, y=70)
+        self.t2.place(x=220, y=70)
 
         self.t3 = tk.Label(self.window, text="Tamaina", bg='CadetBlue1', font=("Times", 12, "bold"))
-        self.t3.place(x=300, y=70)
+        self.t3.place(x=320, y=70)
 
         self.t4 = tk.Label(self.window, text="Puntuak", bg='CadetBlue1', font=("Times", 12, "bold"))
-        self.t4.place(x=500, y=70)
-
-
-        res=Konexioa.getRankingAbsolutua(Konexioa())
-        print(res);
-
-        luzera=len(res)
+        self.t4.place(x=420, y=70)
 
         i = 100
-        unekoPos=0
-        while (unekoPos<luzera):
-            erabiltzailea, tamaina, abiadura, puntuak = res[unekoPos]
+        pos=1
+        ranking=Konexioa.getRanking(Konexioa())
+        print(ranking)
+        luzera = len(ranking)
+        print(luzera)
 
-            self.erab = tk.Label(self.window, text=erabiltzailea, bg='CadetBlue1', font=("Times", 12))
-            self.erab.place(x=10, y=i)
+        unekoPos = 0
+        while (unekoPos < luzera):
 
-            self.tamaina = tk.Label(self.window, text=tamaina, bg='CadetBlue1', font=("Times", 12))
-            self.tamaina.place(x=150, y=i)
+            erabiltzailea, tamaina, abiadura, puntuak = ranking[unekoPos]
 
-            self.abiadura = tk.Label(self.window, text=abiadura, bg='CadetBlue1', font=("Times", 12))
-            self.abiadura.place(x=300, y=i)
+            if(puntuak!=0):
+                self.erab = tk.Label(self.window, text=pos, bg='CadetBlue1', font=("Times", 12))
+                self.erab.place(x=20, y=i)
 
-            self.puntuak = tk.Label(self.window, text=puntuak, bg='CadetBlue1', font=("Times", 12))
-            self.puntuak.place(x=500, y=i)
-            i = i + 30
-            unekoPos=unekoPos+1
+                self.erab = tk.Label(self.window, text=erabiltzailea, bg='CadetBlue1', font=("Times", 12))
+                self.erab.place(x=120, y=i)
+
+                self.tamaina = tk.Label(self.window, text=tamaina, bg='CadetBlue1', font=("Times", 12))
+                self.tamaina.place(x=240, y=i)
+
+                self.abiadura = tk.Label(self.window, text=abiadura, bg='CadetBlue1', font=("Times", 12))
+                self.abiadura.place(x=340, y=i)
+
+                self.puntuak = tk.Label(self.window, text=puntuak, bg='CadetBlue1', font=("Times", 12))
+                self.puntuak.place(x=440, y=i)
+                i = i + 30
+                pos=pos+1
+            unekoPos = unekoPos + 1
 
 
         button3 = tk.Button(self.window,text="Itzuli",padx=40,pady=5,command=self.atzera)
-        button3.place(x=410, y=i+80)
+        button3.place(x=200, y=i+80)
 
         # lehioa ondo ixteko
         self.window.protocol("WM_DELETE_WINDOW", sys.exit)

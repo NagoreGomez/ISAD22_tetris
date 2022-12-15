@@ -285,3 +285,20 @@ class Konexioa(object):
         self.con.commit()
 
 
+    def getErabiltzaileak(self):
+        res = self.cur.execute("SELECT distinct (erabiltzailea,puntuMax) FROM ErabiltzailePuntuazioa ORDER BY puntuMax DESC")
+        erab = res.fetchall()
+        print(erab)
+        return erab
+
+    def getErabiltzaileInfo(self, erabiltzailea):
+        print(erabiltzailea)
+        res = self.cur.execute("SELECT MAX(puntuMax),tamaina,abiadura FROM ErabiltzailePuntuazioa WHERE erabiltzailea=(?)",(erabiltzailea,))
+        info = res.fetchall()
+        return info
+
+    def getRanking(self):
+        res = self.cur.execute(
+            "SELECT  erabiltzailea,tamaina,abiadura,max(puntuMax) FROM ErabiltzailePuntuazioa GROUP BY erabiltzailea ORDER BY puntuMax DESC;")
+        info = res.fetchall()
+        return info
