@@ -2,11 +2,9 @@ import sqlite3
 import sys
 import tkinter as tk
 
-from tkinter import *
-from tkinter import ttk
+
 
 import view.erabiltzaileLeihoa
-#from view.JokatuLeioa import JokatuLeioa
 from controller.konexioa import Konexioa
 
 class RankingAbsolutua(object):
@@ -50,9 +48,8 @@ class RankingAbsolutua(object):
         i = 100
         pos=1
         ranking=Konexioa.getRanking(Konexioa())
-        print(ranking)
         luzera = len(ranking)
-        print(luzera)
+
 
         unekoPos = 0
         while (unekoPos < luzera):
@@ -89,4 +86,4 @@ class RankingAbsolutua(object):
 
     def atzera(self):
         self.window.destroy()
-        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea)
+        view.RankingHautatu.RankigHautatu(self.erabiltzailea).__init__()

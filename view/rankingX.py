@@ -2,11 +2,8 @@ import sqlite3
 import sys
 import tkinter as tk
 
-from tkinter import *
-from tkinter import ttk
 
 import view.erabiltzaileLeihoa
-#from view.JokatuLeioa import JokatuLeioa
 from controller.konexioa import Konexioa
 
 class RankingX(object):
@@ -34,14 +31,14 @@ class RankingX(object):
         # taularen goiko aldea
 
         self.t1 = tk.Label(self.window, text="Posizioa", bg='CadetBlue1', font=("Times", 12, "bold"))
-        self.t1.place(x=40, y=70)
+        self.t1.place(x=150, y=70)
 
         self.t1 = tk.Label(self.window, text="Erabiltzailea", bg='CadetBlue1', font=("Times", 12, "bold"))
-        self.t1.place(x=160, y=70)
+        self.t1.place(x=270, y=70)
 
 
         self.t4 = tk.Label(self.window, text="Puntuak", bg='CadetBlue1', font=("Times", 12, "bold"))
-        self.t4.place(x=280, y=70)
+        self.t4.place(x=390, y=70)
 
 
         res=Konexioa.getRankingX(Konexioa(), tamaina,abiadura)
@@ -54,15 +51,14 @@ class RankingX(object):
         while (unekoPos<luzera):
             erabiltzailea,puntuak = res[unekoPos]
             if(puntuak!=0):
-                print(erabiltzailea)
                 self.erab = tk.Label(self.window, text=pos, bg='CadetBlue1', font=("Times", 12))
-                self.erab.place(x=60, y=i)
+                self.erab.place(x=170, y=i)
 
                 self.erab = tk.Label(self.window, text=erabiltzailea, bg='CadetBlue1', font=("Times", 12))
-                self.erab.place(x=180, y=i)
+                self.erab.place(x=290, y=i)
 
                 self.puntuak = tk.Label(self.window, text=puntuak, bg='CadetBlue1', font=("Times", 12))
-                self.puntuak.place(x=300, y=i)
+                self.puntuak.place(x=410, y=i)
                 i = i + 30
 
                 pos = pos + 1
@@ -82,4 +78,4 @@ class RankingX(object):
 
     def atzera(self):
         self.window.destroy()
-        view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea)
+        view.RankingHautatu.RankigHautatu(self.erabiltzailea).__init__()
