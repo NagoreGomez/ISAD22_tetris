@@ -1,10 +1,9 @@
-import sqlite3
 import sys
 import tkinter as tk
-
-
 import view.erabiltzaileLeihoa
-from controller.konexioa import Konexioa
+from model.Ranking import Ranking
+from model.Sariak import Sariak
+
 
 class RankingX(object):
 
@@ -41,7 +40,8 @@ class RankingX(object):
         self.t4.place(x=390, y=70)
 
 
-        res=Konexioa.getRankingX(Konexioa(), tamaina,abiadura)
+        #res=Konexioa.getRankingX(Konexioa(), tamaina,abiadura)
+        res=Ranking().getRankingX(tamaina,abiadura)
 
         luzera=len(res)
 
@@ -63,8 +63,6 @@ class RankingX(object):
 
                 pos = pos + 1
             unekoPos = unekoPos + 1
-
-
 
 
 

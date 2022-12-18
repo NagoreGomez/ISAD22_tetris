@@ -7,9 +7,10 @@ import view.ongietorrileioa
 import view.saria
 from model.Tableroa import Tableroa
 from model.Piezak import *
-from controller.konexioa import Konexioa
-from playsound import playsound
 import pygame
+from model.Jokalariak import Jokalariak
+from model.Jokalaria import Jokalaria
+from model.Sariak import Sariak
 
 erabiltzailea=""
 
@@ -35,19 +36,15 @@ class JokatuLeihoa(object):
 		piezak.erabiltzailea = erabiltzailea
 
 		#koloreaLortu
-		fondoa=Konexioa.getAtzekoKolorea(Konexioa(), self.erabiltzailea)
-		print(fondoa)
+		fondoa=self.erabiltzailea.fondoa
 		#kolorea ezarri
 		self.window['bg'] = fondoa
 
-		#adreilu koloreak
-		#Laukia, Zutabea, Lforma, LformaAlderantzizko, Zforma, ZformaAlderantzizko, Tforma
-		adreiluak = Konexioa.getAdreiluak(Konexioa(), self.erabiltzailea)
-
-
 
 		# soinua
-		self.soinua=Konexioa.getSoinuak(Konexioa(),self.erabiltzailea)
+		# self.soinua=Konexioa.getSoinuak(Konexioa(),self.erabiltzailea)
+		self.soinua=self.erabiltzailea.soinua
+
 
 
 
@@ -115,7 +112,8 @@ class JokatuLeihoa(object):
 					datuak = datuak + "None/"
 				else:
 					datuak = datuak + tab.tab[i][j] + "/"
-		Konexioa.partidaGorde(Konexioa(), self.erabiltzailea, datuak, self.canvas.tab.puntuazioa)
+		#Konexioa.partidaGorde(Konexioa(), self.erabiltzailea, datuak, self.canvas.tab.puntuazioa)
+		self.erabiltzailea.partidaGorde(datuak, self.canvas.tab.puntuazioa)
 		pygame.quit()
 		self.window.destroy()
 		view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
@@ -213,47 +211,46 @@ class TableroaPanela(tk.Frame):
 				partidakoPuntuak=int(partidakoPuntuak)
 
 
-				erabiltzailePuntuak=Konexioa.getPuntuak(Konexioa(),erabiltzailea=self.erabiltzailea,tamaina=tamainaKodea,abiadura=abiaduraKodea)
-				#erabiltzailePuntuak = str(erabiltzailePuntuak)
-				#erabiltzailePuntuak=int(erabiltzailePuntuak)
+				#erabiltzailePuntuak=Konexioa.getPuntuak(Konexioa(),erabiltzailea=self.erabiltzailea,tamaina=tamainaKodea,abiadura=abiaduraKodea)
+				erabiltzailePuntuak=Jokalariak().getPuntuak(erabiltzailea=self.erabiltzailea.erabiltzailea,tamaina=tamainaKodea,abiadura=abiaduraKodea)
+
 
 
 				if(erabiltzailePuntuak<partidakoPuntuak):
-					Konexioa.puntuakEguneratu(Konexioa(),self.erabiltzailea, tamainaKodea, abiaduraKodea,partidakoPuntuak)
+					Jokalariak().puntuakEguneratu(self.erabiltzailea.erabiltzailea, tamainaKodea, abiaduraKodea,partidakoPuntuak)
+					#Konexioa.puntuakEguneratu(Konexioa(),self.erabiltzailea, tamainaKodea, abiaduraKodea,partidakoPuntuak)
 
-				puntuak= Konexioa.getMailakoSariPuntuak(Konexioa(),tamainaKodea,abiaduraKodea);
+				#puntuak= Konexioa.getMailakoSariPuntuak(Konexioa(),tamainaKodea,abiaduraKodea);
+				puntuak= Sariak().getMailakoSariPuntuak(tamainaKodea,abiaduraKodea)
 				puntuak=int(puntuak);
 
 				print("Puntuak");
 				print(puntuak);
 
 				if(partidakoPuntuak>=puntuak):
-					partidaKop = Konexioa.getErabiltzailearenMailakoPartidaKop(Konexioa(), tamainaKodea, abiaduraKodea,erabiltzailea);
+					#partidaKop = Konexioa.getErabiltzailearenMailakoPartidaKop(Konexioa(), tamainaKodea, abiaduraKodea,erabiltzailea)
+					partidaKop=Jokalariak().getErabiltzailearenMailakoPartidaKop(tamainaKodea, abiaduraKodea,self.erabiltzailea.erabiltzailea)
 					partidaKop=partidaKop+1;
-					Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,puntuak,partidaKop,erabiltzailea);
+					#Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,puntuak,partidaKop,self.erabiltzailea.erabiltzailea);
+					Jokalariak().unekoPuntuakEguneratu(tamainaKodea,abiaduraKodea,puntuak,partidaKop,self.erabiltzailea.erabiltzailea)
 					print(partidaKop);
 
 					# comprobar si ha ganado algun premio
-					erabiltzailearenPartidaKop = Konexioa.getErabiltzailearenMailakoPartidaKop(Konexioa(), tamainaKodea,
-																							   abiaduraKodea,erabiltzailea);
-					if (erabiltzailearenPartidaKop == 4 or erabiltzailearenPartidaKop == 2):
-						erabiltzailearenPartidaKop=str(erabiltzailearenPartidaKop)
-						id = Konexioa.getSariId(Konexioa(), tamainaKodea, abiaduraKodea, erabiltzailearenPartidaKop);
-						Konexioa.erabiltzaleariSariaEman(Konexioa(), id, erabiltzailea);
+
+					if (partidaKop == 4 or partidaKop == 2):
+						partidaKop=str(partidaKop)
+						#id = Konexioa.getSariId(Konexioa(), tamainaKodea, abiaduraKodea, partidaKop)
+						id=Sariak().getSariId(tamainaKodea, abiaduraKodea, partidaKop)
+						#Konexioa.erabiltzaleariSariaEman(Konexioa(), id, self.erabiltzailea.erabiltzailea)
+						Jokalariak().erabiltzaleariSariaEman(id, self.erabiltzailea.erabiltzailea)
 						view.saria.saria(self.erabiltzailea,tamainax,tamainay,abiadura,puntuak, partidaKop).__init__()
 
-
-
 				else:
-					Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,0,0,erabiltzailea);
-
-
-
-
+					#Konexioa.actualizarPuntos(Konexioa(),tamainaKodea,abiaduraKodea,0,0,self.erabiltzailea.erabiltzailea);
+					Jokalariak().unekoPuntuakEguneratu(tamainaKodea,abiaduraKodea,0,0,self.erabiltzailea.erabiltzailea)
 
 				#BERRIZ HASIERATU
 				self.tab.hasieratu_tableroa()
-
 
 				return
 		self.jokatzen = self.after(abiadura, self.pausu_bat) #ABIADURA

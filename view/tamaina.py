@@ -6,6 +6,7 @@ from view.JokatuLeihoa import JokatuLeihoa
 
 
 
+
 abiadura=0
 
 class tamaina(object):

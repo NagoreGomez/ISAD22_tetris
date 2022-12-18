@@ -3,8 +3,8 @@ import tkinter as tk
 
 
 import view
-from view.JokatuLeihoa import JokatuLeihoa
 from view.tamaina import tamaina
+
 
 
 class abiadurak(object):

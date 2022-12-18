@@ -2,8 +2,8 @@ import sys
 import tkinter as tk
 from tkinter import *
 import view
-import sqlite3
-from controller.konexioa import Konexioa
+from model.Jokalariak import Jokalariak
+from model.Jokalaria import Jokalaria
 
 
 class erregistratu(object):
@@ -79,17 +79,20 @@ class erregistratu(object):
         if ((len(izena) != 0) & (len(erabiltzailea) != 0) & (len(email) != 0) & (len(pasahitza) != 0) & (
                 len(gakoGaldera) != 0) & (len(gakoa) != 0)):
 
-            erab2 = Konexioa.erabiltzaileaKonprobatu(Konexioa(), erabiltzailea)
+            #erab2 = Konexioa.erabiltzaileaKonprobatu(Konexioa(), erabiltzailea)
+            erab2= Jokalariak().erabiltzaileaKonprobatu(erabiltzailea)
 
             #default balioak   PROBARRR
             fondoa='#98F5FF'
             adreiluak='1'
             soinua='soinua1'
             puntuak=0
-            partida='#'
+            partida='/'
 
             if erab2 is None:
-                Konexioa.erabiltzaileaGehitu(Konexioa(), izena, erabiltzailea, email, pasahitza, gakoa, gakoGaldera,fondoa,adreiluak,soinua,puntuak, partida)
+                jok=Jokalaria(erabiltzailea,izena, email, pasahitza, gakoa, gakoGaldera,fondoa,adreiluak,soinua,puntuak, partida)
+                Jokalariak().erabiltzaileaGehitu(jok)
+                #Konexioa.erabiltzaileaGehitu(Konexioa(), izena, erabiltzailea, email, pasahitza, gakoa, gakoGaldera,fondoa,adreiluak,soinua,puntuak, partida)
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
 

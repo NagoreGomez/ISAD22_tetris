@@ -1,13 +1,11 @@
-import sqlite3
+
 import sys
 import tkinter as tk
 
-from tkinter import *
-from tkinter import ttk
 
 import view.erabiltzaileLeihoa
-#from view.JokatuLeioa import JokatuLeioa
-from controller.konexioa import Konexioa
+
+from model.Jokalariak import Jokalariak
 
 class jokalariakKudeatu(object):
 
@@ -50,7 +48,8 @@ class jokalariakKudeatu(object):
         self.t6.place(x=750, y=70)
 
         # botoia
-        res = Konexioa.getErabiltzailea(Konexioa())
+        #res = Konexioa.getErabiltzailea(Konexioa())
+        res=Jokalariak().getErabiltzailea()
         i = 100
         for row in res:
             self.botoia = tk.Radiobutton(self.window, variable=self.aukera, value=row, bg='CadetBlue1',font=("Times", 12))
@@ -62,7 +61,8 @@ class jokalariakKudeatu(object):
 
         #erabiltzailea
 
-        res = Konexioa.getErabiltzailea(Konexioa())
+        #res = Konexioa.getErabiltzailea(Konexioa())
+        res = Jokalariak().getErabiltzailea()
         i = 100
         for row in res:
             #self.l=tk.Label(self.window,text=row)
@@ -74,7 +74,8 @@ class jokalariakKudeatu(object):
 
 
         #izena
-        res = Konexioa.getIzena(Konexioa())
+        #res = Konexioa.getIzena(Konexioa())
+        res = Jokalariak().getIzena()
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -82,7 +83,9 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # email
-        res = Konexioa.getEmail(Konexioa())
+        #res = Konexioa.getEmail(Konexioa())
+        res = Jokalariak().getEmail()
+
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -90,7 +93,8 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # pasahitza
-        res = Konexioa.getPasahitza(Konexioa())
+        #res = Konexioa.getPasahitza(Konexioa())
+        res = Jokalariak().getPasahitza()
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -98,7 +102,8 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # galko galdera
-        res = Konexioa.getGakoGaldera(Konexioa())
+        #res = Konexioa.getGakoGaldera(Konexioa())
+        res = Jokalariak().getGakoGaldera()
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -106,7 +111,8 @@ class jokalariakKudeatu(object):
             i = i + 30
 
         # gakoa
-        res = Konexioa.getGako(Konexioa())
+        #res = Konexioa.getGako(Konexioa())
+        res = Jokalariak().getGako()
         i = 100
         for row in res:
             self.datuak = tk.Label(self.window, text=row, bg='CadetBlue1', font=("Times", 12))
@@ -125,13 +131,15 @@ class jokalariakKudeatu(object):
 
     def ezabatu(self):
         erab = self.aukera.get()
-        res=Konexioa.erabiltzaileaKonprobatu(Konexioa(),erab)
+        #res=Konexioa.erabiltzaileaKonprobatu(Konexioa(),erab)
+        res=Jokalariak().erabiltzaileaKonprobatu(erab)
         if(res is None):
             print("Erabiltzailea ez dago datu basean")
         else:
-            Konexioa.ezabatuErabiltzailea(Konexioa(),erab)
+            #Konexioa.ezabatuErabiltzailea(Konexioa(),erab)
+            Jokalariak().ezabatuErabiltzailea(erab)
             self.window.destroy()
-            jokalariakKudeatu().__init__()
+            jokalariakKudeatu(self.erabiltzailea).__init__()
 
 
 

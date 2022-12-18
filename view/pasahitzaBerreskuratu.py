@@ -2,8 +2,8 @@ import sys
 from tkinter import *
 import tkinter as tk
 import view
-import sqlite3
-from controller.konexioa import Konexioa
+from model.Jokalariak import Jokalariak
+from model.Jokalaria import Jokalaria
 
 
 
@@ -16,8 +16,6 @@ class pasahitzaBerreskuratu(object):
         self.window.geometry('600x400')
         self.window['bg'] = 'CadetBlue1'
 
-        con = sqlite3.connect("datubasea.db")  # konexioa ezarri
-        self.cur = con.cursor()
 
         self.Erregistroa = tk.Label(self.window, text="PASAHITZA BERRESKURATZEKO ORRIA", bg='CadetBlue1',
                                font=("Times", 14, "bold"))
@@ -79,11 +77,14 @@ class pasahitzaBerreskuratu(object):
 
         if ((len(erabiltzailea)!=0) &(len(gakoa)!=0 )&(len(pasahitzaBerria)!=0 ) &(len(gakoGaldera)!=0 )):
             #begiratu erabiltzaile eta pasahitz egokia sortu dituen
-            dago=Konexioa.gakoakKonprobatu(Konexioa(),erabiltzailea,gakoGaldera,gakoa)
+            #dago=Konexioa.gakoakKonprobatu(Konexioa(),erabiltzailea,gakoGaldera,gakoa)
+            erab=Jokalariak().getErabiltzaileaInfo(erabiltzailea)
+            print(erab.gakoGaldera)
 
-            if (dago):
+            if (erab.gakoGaldera==gakoGaldera and erab.gakoa==gakoa):
                 # update
-                Konexioa.pasahitzaAldatu(Konexioa(),erabiltzailea,pasahitzaBerria)
+                erab.pasahitzaAldatu(pasahitzaBerria)
+                #Konexioa.pasahitzaAldatu(Konexioa(),erabiltzailea,pasahitzaBerria)
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
 

@@ -1,5 +1,3 @@
-from model import Piezak
-
 
 
 class Tableroa:

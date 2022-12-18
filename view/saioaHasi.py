@@ -1,10 +1,9 @@
 import sys
 from tkinter import *
 import tkinter as tk
-import sqlite3
 import view
-from controller.konexioa import Konexioa
 from view.erabiltzaileLeihoa import erabiltzaileLeihoa
+from model.Jokalariak import Jokalariak
 
 
 class saioaHasi(object):
@@ -15,8 +14,6 @@ class saioaHasi(object):
         self.window.title("Saioa hasteko orria")
         self.window.geometry('600x400')
         self.window['bg'] = 'CadetBlue1'
-
-
 
 
         Erregistroa = tk.Label(self.window, text="SAIOA HASTEKO ORRIA", bg='CadetBlue1', font=("Times", 14, "bold"))
@@ -62,7 +59,8 @@ class saioaHasi(object):
 
         if ((len(self.erabiltzailea)!=0) &(len(pasahitza)!=0 )):
             #begiratu saio hastea ondo egin den
-            pasahitza2=Konexioa.erabiltzailearenPasahitza(Konexioa(),self.erabiltzailea)
+            #pasahitza2=Konexioa.erabiltzailearenPasahitza(Konexioa(),self.erabiltzailea)
+            pasahitza2=Jokalariak().erabiltzailearenpasahitza(self.erabiltzailea)
 
 
             if pasahitza2 is None: #erabiltzailea ez dago dban
@@ -78,7 +76,8 @@ class saioaHasi(object):
                 else: #Idatzitako pasahitza dagokio erabiltzaile orri
                     self.window.destroy()
                     #if(self.erabiltzailea is not None):
-                    view.erabiltzaileLeihoa.erabiltzaileLeihoa(self.erabiltzailea).__init__()
+                    Jok=Jokalariak().getErabiltzaileaInfo(self.erabiltzailea)
+                    erabiltzaileLeihoa(Jok).__init__(Jok)
 
         else:
             tk.Label(self.window, text='Bete itzazu eremu guztiak mesedez.', pady=10,padx=90, bg='CadetBlue1',font=("Times", 14, "bold")).place(relx=.5, rely=.7,anchor= CENTER)

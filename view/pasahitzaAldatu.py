@@ -2,8 +2,8 @@ import sys
 from tkinter import *
 import tkinter as tk
 import view
-import sqlite3
-from controller.konexioa import Konexioa
+from model.Jokalariak import Jokalariak
+from model.Jokalaria import Jokalaria
 
 class pasahitzaAldatu(object):
 
@@ -14,8 +14,7 @@ class pasahitzaAldatu(object):
         self.window.geometry('600x400')
         self.window['bg'] = 'CadetBlue1'
 
-        con = sqlite3.connect("datubasea.db")  # konexioa ezarri
-        self.cur = con.cursor()
+
 
         self.Erregistroa = tk.Label(self.window, text="PASAHITZA ALDATZEKO ORRIA", bg='CadetBlue1', font=("Times", 14, "bold"))
         self.Erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)
@@ -68,10 +67,13 @@ class pasahitzaAldatu(object):
 
         if ((len(erabiltzailea) != 0) & (len(pasahitza) != 0) & (len(pasahitzaBerria) != 0)):
             # begiratu erabiltzaile eta pasahitz egokia sortu dituen
-            dago=Konexioa.erabiltzaileaEtaPasahitzaKonprobatu(Konexioa(),erabiltzailea,pasahitza)
-            if (dago):
+            #dago=Konexioa.erabiltzaileaEtaPasahitzaKonprobatu(Konexioa(),erabiltzailea,pasahitza)
+            erab=Jokalariak().getErabiltzaileaInfo(erabiltzailea)
+            if erab is not None:
                 # update
-                Konexioa.pasahitzaAldatu(Konexioa(),erabiltzailea,pasahitzaBerria)
+                #Jokalaria().pasahitzaAldatu(erabiltzailea,pasahitzaBerria)
+                erab.pasahitzaAldatu(pasahitzaBerria)
+                #Konexioa.pasahitzaAldatu(Konexioa(),erabiltzailea,pasahitzaBerria)
                 self.window.destroy()
                 view.saioaHasi.saioaHasi().__init__()
             else:

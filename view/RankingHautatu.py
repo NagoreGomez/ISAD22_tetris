@@ -3,7 +3,6 @@ import sys
 import tkinter as tk
 from tkinter import *
 import view
-from controller.konexioa import Konexioa
 from view.rankingAbsolutua import RankingAbsolutua
 from view.rankingX import RankingX
 

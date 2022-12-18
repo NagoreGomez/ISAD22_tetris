@@ -1,11 +1,8 @@
-import sqlite3
 import sys
 import tkinter as tk
-
-
-
 import view.erabiltzaileLeihoa
-from controller.konexioa import Konexioa
+from model.Ranking import Ranking
+
 
 class RankingAbsolutua(object):
 
@@ -47,7 +44,8 @@ class RankingAbsolutua(object):
 
         i = 100
         pos=1
-        ranking=Konexioa.getRanking(Konexioa())
+        #ranking=Konexioa.getRanking(Konexioa())
+        ranking=Ranking().getRankingAbsolutua()
         luzera = len(ranking)
 
 

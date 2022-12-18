@@ -42,19 +42,19 @@ class Konexioa(object):
         res = self.cur.execute("SELECT * FROM Sariak")
         self.cur.execute("DELETE FROM Sariak")
         if res.fetchone() is None:
-            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','1','10','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','1','10','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','2','1000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('4','1','2','1000','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('5','1','3','1000','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('6','1','3','1000','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('1','1','1','300','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('2','1','1','300','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('3','1','2','300','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('4','1','2','300','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('5','1','3','300','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('6','1','3','300','4')")
 
-            self.cur.execute("INSERT INTO Sariak VALUES ('7','2','1','500','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('8','2','1','500','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('9','2','2','500','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('10','2','2','500','4')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('11','2','3','500','2')")
-            self.cur.execute("INSERT INTO Sariak VALUES ('12','2','3','500','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('7','2','1','200','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('8','2','1','200','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('9','2','2','200','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('10','2','2','200','4')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('11','2','3','200','2')")
+            self.cur.execute("INSERT INTO Sariak VALUES ('12','2','3','200','4')")
 
             self.cur.execute("INSERT INTO Sariak VALUES ('13','3','1','100','2')")
             self.cur.execute("INSERT INTO Sariak VALUES ('14','3','1','100','4')")
@@ -90,7 +90,7 @@ class Konexioa(object):
             return erab[0]
 
 
-    def erabiltzaileaGehitu(self,izena,erabiltzailea,email,pasahitza,gakoa,gakoGaldera,fondoa,adreiluak,soinua,puntuak, partida):
+    def erabiltzaileaGehitu(self,izena,erabiltzailea,email,pasahitza,gakoGaldera,gakoa,fondoa,adreiluak,soinua,puntuak, partida):
         self.cur.execute("INSERT INTO Erabiltzaileak VALUES(?, ?, ?,?,?,?,?,?,?,?,?)",
                     (erabiltzailea, izena, email, pasahitza, gakoGaldera, gakoa,fondoa,adreiluak,soinua,puntuak, partida))
 
@@ -110,30 +110,21 @@ class Konexioa(object):
     def konexioa_itxi(self):
         self.con.close()
 
+    def getErabiltzaileaInfo(self,erabiltzailea):
+        res = self.cur.execute("SELECT * FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        return res.fetchone()
 
-    def pertsonalizazioaGorde(self,kolorea,adreiluak,soinua,erabiltzailea):
-        self.cur.execute("UPDATE Erabiltzaileak SET fondoa=(?), adreiluak=(?), soinua=(?) WHERE erabiltzailea=(?)",  (kolorea,adreiluak,soinua,erabiltzailea))
+
+
+    def pertsonalizazioaGorde(self,erabiltzailea):
+        self.cur.execute("UPDATE Erabiltzaileak SET fondoa=(?), adreiluak=(?), soinua=(?) WHERE erabiltzailea=(?)",  (erabiltzailea.fondoa,erabiltzailea.adreiluak,erabiltzailea.soinua,erabiltzailea.erabiltzailea))
         self.con.commit()
 
 
-    def getAtzekoKolorea(self,erabiltzailea):
-        res=self.cur.execute("SELECT fondoa FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
-        fondoa = res.fetchone()
-        return fondoa[0]
 
-    def getAdreiluak(self,erabiltzailea):
-        res=self.cur.execute("SELECT adreiluak FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
-        adreiluak = res.fetchone()
-        return adreiluak[0]
-
-    def getSoinuak(self,erabiltzailea):
-        res=self.cur.execute("SELECT soinua FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
-        soinua = res.fetchone()
-        return soinua[0]
-
-    def partidaGorde(self,erabiltzailea, partida, puntuak):
+    def partidaGorde(self,erabiltzailea):
         self.cur.execute("UPDATE Erabiltzaileak SET partida=(?), puntuak=(?) WHERE erabiltzailea=(?)",
-                         (partida, puntuak, erabiltzailea))
+                         (erabiltzailea.partida, erabiltzailea.puntuak, erabiltzailea.erabiltzailea))
         self.con.commit()
 
     def partidaKargatu(self,erabiltzailea):
@@ -156,8 +147,8 @@ class Konexioa(object):
         else:
             return erab[0]
 
-    def pasahitzaAldatu(self,erabiltzailea,pasahitza):
-        self.cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)",(pasahitza, erabiltzailea))
+    def pasahitzaAldatu(self,erabiltzailea):
+        self.cur.execute("UPDATE Erabiltzaileak SET pasahitza=(?) WHERE erabiltzailea=(?)",(erabiltzailea.pasahitza, erabiltzailea.erabiltzailea))
         self.con.commit()
 
 
@@ -203,6 +194,9 @@ class Konexioa(object):
 
     def ezabatuErabiltzailea(self,erabiltzailea):
         self.cur.execute("DELETE FROM Erabiltzaileak WHERE erabiltzailea=(?)", (erabiltzailea,))
+        self.cur.execute("DELETE FROM ErabiltzailePuntuazioa WHERE erabiltzailea=(?)", (erabiltzailea,))
+        self.cur.execute("DELETE FROM ErabiltzaileSariak WHERE erabiltzailea=(?)", (erabiltzailea,))
+
         self.con.commit()
 
     def puntuakEguneratu(self,erabiltzailea,tamaina,abiadura,puntuak):
@@ -237,18 +231,6 @@ class Konexioa(object):
         return ema
 
 
-    def getRankingAbsolutua(self):
-        res = self.cur.execute("SELECT erabiltzailea,tamaina,abiadura,puntuMax FROM ErabiltzailePuntuazioa ORDER BY puntuMax DESC")
-        ema = res.fetchall()
-        return ema
-
-    def getRankingX(self,tamaina, abiadura):
-        res = self.cur.execute("SELECT erabiltzailea,puntuMax FROM ErabiltzailePuntuazioa WHERE tamaina=(?) AND abiadura=(?) ORDER BY puntuMax DESC ",
-                               (tamaina,abiadura))
-        ema = res.fetchall()
-        return ema
-
-
     def getMailakoSariPuntuak(self,tamaina,abiadura):
         res = self.cur.execute(
             "SELECT puntuKop FROM Sariak WHERE tamaina=(?) AND abiadura=(?)",
@@ -265,14 +247,16 @@ class Konexioa(object):
 
 
 
-    def actualizarPuntos(self,tamaina,abiadura,puntuak,partidaKop,erabiltzailea):
+    def unekoPuntuakEguneratu(self,tamaina,abiadura,puntuak,partidaKop,erabiltzailea):
         self.cur.execute(
             "UPDATE ErabiltzailePuntuazioa SET unekoPuntuak=(?), partidaKop=(?) WHERE tamaina=(?) AND abiadura=(?) AND erabiltzailea=(?)",
             (puntuak,partidaKop,tamaina, abiadura,erabiltzailea))
         self.con.commit()
 
+
+
     def getSariId(self, tamaina, abiadura, partidaKop):
-        res =self.cur.execute("SELECT id FROM Sariak WHERE tamaina=(?) AND abiadura=(?) ",(tamaina,abiadura))
+        res =self.cur.execute("SELECT id FROM Sariak WHERE tamaina=(?) AND abiadura=(?) AND partidaKop=(?) ",(tamaina,abiadura,partidaKop))
         id = res.fetchone()
         return id[0]
 
@@ -297,8 +281,15 @@ class Konexioa(object):
         info = res.fetchall()
         return info
 
-    def getRanking(self):
+    def getRankingAbsolutua(self):
         res = self.cur.execute(
             "SELECT  erabiltzailea,tamaina,abiadura,max(puntuMax) FROM ErabiltzailePuntuazioa GROUP BY erabiltzailea ORDER BY puntuMax DESC;")
         info = res.fetchall()
         return info
+
+
+    def getRankingX(self,tamaina, abiadura):
+        res = self.cur.execute("SELECT erabiltzailea,puntuMax FROM ErabiltzailePuntuazioa WHERE tamaina=(?) AND abiadura=(?) ORDER BY puntuMax DESC ",
+                               (tamaina,abiadura))
+        ema = res.fetchall()
+        return ema

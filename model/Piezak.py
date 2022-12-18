@@ -1,4 +1,5 @@
 from controller.konexioa import Konexioa
+from model.Jokalaria import Jokalaria
 erabiltzailea=""
 
 class Pieza:
@@ -44,7 +45,8 @@ class Pieza:
 
 class Laukia(Pieza):
 	def __init__(self, kolorea=None):
-		koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		#koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		koloreKodea=erabiltzailea.adreiluak
 
 		if(koloreKodea=='1'):
 			kolorea2='#ADFF2F'
@@ -57,8 +59,8 @@ class Laukia(Pieza):
 
 class Zutabea(Pieza):
 	def __init__(self, kolorea=None):
-		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
-
+		# koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		koloreKodea=erabiltzailea.adreiluak
 		if (koloreKodea == '1'):
 			kolorea2 = '#F5DEB3'
 		elif (koloreKodea == '2'):
@@ -71,8 +73,8 @@ class Zutabea(Pieza):
 
 class Lforma(Pieza):
 	def __init__(self, kolorea=None):
-		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
-
+		# koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		koloreKodea=erabiltzailea.adreiluak
 		if (koloreKodea == '1'):
 			kolorea2 = '#FF8000'
 		elif (koloreKodea == '2'):
@@ -84,8 +86,8 @@ class Lforma(Pieza):
 class LformaAlderantzizko(Pieza):
 
 	def __init__(self, kolorea=None):
-		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
-
+		# koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		koloreKodea=erabiltzailea.adreiluak
 		if (koloreKodea == '1'):
 			kolorea2 = '#FF4500'
 		elif (koloreKodea == '2'):
@@ -97,8 +99,8 @@ class LformaAlderantzizko(Pieza):
 
 class Zforma(Pieza):
 	def __init__(self, kolorea=None):
-		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
-
+		# koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		koloreKodea=erabiltzailea.adreiluak
 		if (koloreKodea == '1'):
 			kolorea2 = '#DA70D6'
 		elif (koloreKodea == '2'):
@@ -109,8 +111,8 @@ class Zforma(Pieza):
 
 class ZformaAlderantzizko(Pieza):
 	def __init__(self, kolorea=None):
-		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
-
+		# koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		koloreKodea=erabiltzailea.adreiluak
 		if (koloreKodea == '1'):
 			kolorea2 = '#FFC0CB'
 		elif (koloreKodea == '2'):
@@ -121,8 +123,8 @@ class ZformaAlderantzizko(Pieza):
 
 class Tforma(Pieza):
 	def __init__(self, kolorea=None):
-		koloreKodea = Konexioa.getAdreiluak(Konexioa(), erabiltzailea)
-
+		# koloreKodea=Konexioa.getAdreiluak(Konexioa(),erabiltzailea)
+		koloreKodea=erabiltzailea.adreiluak
 		if (koloreKodea == '1'):
 			kolorea2 = '#8B3626'
 		elif (koloreKodea == '2'):

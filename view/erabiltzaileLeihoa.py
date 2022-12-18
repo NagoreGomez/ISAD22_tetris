@@ -1,15 +1,11 @@
 import sys
 import tkinter as tk
-
-import pygame
-
-
 from view.abiadurak import abiadurak
 import view
 from view.pertsonalizatu import pertsonalizatu
-from controller.konexioa import Konexioa
 from view.jokalariakKudeatu import jokalariakKudeatu
 from view.RankingHautatu import RankigHautatu
+from model.Jokalariak import Jokalariak
 
 class erabiltzaileLeihoa(object):
 
@@ -31,19 +27,17 @@ class erabiltzaileLeihoa(object):
         button3.pack(pady=10)
 
 
-
-        erab=Konexioa.erabiltzaileaKonprobatu(Konexioa(),erabiltzailea)
+        #erab=Konexioa.erabiltzaileaKonprobatu(Konexioa(),erabiltzailea)
+        erab=self.erabiltzailea.erabiltzailea
         if (erab=='admin'):
             button1 = tk.Button(self.window, text="Jokalariak kudeatu", padx=40, pady=5, command=self.administratu)
             button1.pack(pady=10)
 
+        #self.partida=Konexioa.partidaKargatu(Konexioa(), self.erabiltzailea)
+        #self.partida=Jokalariak.partidaKargatu(self.erabiltzailea)
+        self.partida=self.erabiltzailea.partida
 
-
-
-
-        self.partida=Konexioa.partidaKargatu(Konexioa(), self.erabiltzailea)
-
-        if (self.partida != "#"):
+        if (self.partida != "/"):
             button4 = tk.Button(self.window, text="Gordetako partida berreskuratu", padx=40, pady=5,
                                 command=self.partidaKargatu)
             button4.pack(pady=10)

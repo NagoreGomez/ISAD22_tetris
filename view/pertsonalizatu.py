@@ -1,10 +1,8 @@
-import sqlite3
 import sys
 import tkinter as tk
-from tkinter import *
 import view
-from view.abiadurak import abiadurak
-from controller.konexioa import Konexioa
+from model.Jokalaria import Jokalaria
+from model.Jokalariak import Jokalariak
 
 
 class pertsonalizatu(object):
@@ -111,7 +109,9 @@ class pertsonalizatu(object):
 
 
         #guardar en la datubase
-        Konexioa.pertsonalizazioaGorde(Konexioa(), self.fondoa,self.adreiluak,self.soinua,self.erabiltzailea)
+        #Konexioa.pertsonalizazioaGorde(Konexioa(), self.fondoa,self.adreiluak,self.soinua,self.erabiltzailea)
+
+        self.erabiltzailea.pertsonalizazioaGorde(self.fondoa,self.adreiluak,self.soinua)
 
         #volver al menu
         self.window.destroy()

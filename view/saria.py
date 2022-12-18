@@ -1,6 +1,4 @@
-import sys
 import tkinter as tk
-from tkinter import *
 
 
 
@@ -24,7 +22,7 @@ class saria(object):
         Erregistroa = tk.Label(self.window, text="ZORIONAK!", bg='CadetBlue1', font=("Times", 24, "bold"))
         Erregistroa.pack(pady=10, padx=20, ipadx=10, ipady=10)
 
-        self.saria = tk.Label(self.window, text=f'{erabiltzailea}, sari bat irabazi duzu:', bg='CadetBlue1', font=("Times", 14))
+        self.saria = tk.Label(self.window, text=f'{erabiltzailea.erabiltzailea}, sari bat irabazi duzu:', bg='CadetBlue1', font=("Times", 14))
         self.saria.pack(pady=10, padx=5, ipadx=10, ipady=10)
 
         self.info = tk.Label(self.window,
@@ -32,7 +30,7 @@ class saria(object):
                               bg='CadetBlue1', font=("Times", 14))
         self.info.pack(pady=10, padx=5, ipadx=10, ipady=10)
 
-        #irudia=PhotoImage(file="/irudiak/celebracion.jpg")
+        #irudia=PhotoImage(file='irudiak/celebracion.jpg')
         #Label(self.window,image=irudia).place(x=100,y=100);
 
 
